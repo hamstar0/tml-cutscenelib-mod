@@ -30,9 +30,9 @@ v1
 	-	Silence music during cutscene
 	-	Add debug mode to enable map view during cutscene
 	-	MP: Implement cutscene non-primary viewers (receive movie set from network)
+
 	-	Set chat command to activate cutscene
 	-	Rename mod to Cutscene Lib
-
 	-	Fixes
 		-	Adjust for resolution
 		-	Fix camera position on ship interior

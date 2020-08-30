@@ -11,6 +11,8 @@ namespace CutsceneLib.Definitions {
 
 		public abstract SceneID FirstSceneId { get; }
 
+		public abstract bool Autoplay { get; }
+
 		////
 
 		public int PlaysForWhom { get; private set; } = -1;

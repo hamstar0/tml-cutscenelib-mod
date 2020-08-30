@@ -34,7 +34,6 @@ namespace CutsceneLib.Logic {
 		private void UpdateActivations_Host_Internal() {
 			int playerCount = Main.player.Length;
 			
-LogHelpers.LogOnce("1");
 			foreach( CutsceneID cutsceneId in this.CutsceneIDs ) {
 				for( int i=0; i<playerCount; i++ ) {
 					Player plr = Main.player[i];
@@ -42,9 +41,10 @@ LogHelpers.LogOnce("1");
 						continue;
 					}
 
-LogHelpers.LogOnce("2 "+ cutsceneId + ", "+i);
 					if( !this.TryBeginCutscene(cutsceneId, plr, true, out string result) ) {
-						LogHelpers.LogOnce( "Tried to begin cutscene: "+result );
+						if( CutsceneLibConfig.Instance.DebugModeInfo ) {
+							LogHelpers.LogOnce( "Tried to begin cutscene: " + result );
+						}
 					}
 
 					if( Main.netMode == NetmodeID.SinglePlayer ) {

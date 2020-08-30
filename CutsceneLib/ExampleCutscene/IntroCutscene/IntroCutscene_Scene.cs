@@ -5,11 +5,11 @@ using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Tiles;
 using CutsceneLib.Definitions;
 using CutsceneLib.Net;
-using CutsceneLib.Cutscenes.IntroCutscene.Scenes;
-using CutsceneLib.Cutscenes.IntroCutscene.Net;
+using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes;
+using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 
-namespace CutsceneLib.Cutscenes.IntroCutscene {
+namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 	partial class IntroCutscene : Cutscene {
 		protected override SceneBase CreateScene( SceneID sceneId ) {
 			if( sceneId.Equals(this.FirstSceneId) ) {

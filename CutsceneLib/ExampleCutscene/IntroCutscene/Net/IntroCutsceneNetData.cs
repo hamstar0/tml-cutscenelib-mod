@@ -5,7 +5,7 @@ using HamstarHelpers.Helpers.Debug;
 using CutsceneLib.Net;
 
 
-namespace CutsceneLib.Cutscenes.IntroCutscene.Net {
+namespace CutsceneLib.ExampleCutscene.IntroCutscene.Net {
 	[Serializable]
 	class IntroCutsceneNetData : CutsceneNetStart {
 		public Vector2 ExteriorShipView;

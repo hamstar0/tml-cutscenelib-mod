@@ -5,10 +5,10 @@ using HamstarHelpers.Classes.TileStructure;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Info;
 using CutsceneLib.Definitions;
-using CutsceneLib.Cutscenes.IntroCutscene.Scenes;
+using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes;
 
 
-namespace CutsceneLib.Cutscenes.IntroCutscene {
+namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 	partial class IntroCutscene : Cutscene {
 		private TileStructure _ShipExterior;
 		private TileStructure _ShipInterior;

@@ -5,31 +5,21 @@ using Terraria;
 using HamstarHelpers.Classes.CameraAnimation;
 using HamstarHelpers.Helpers.Debug;
 using CutsceneLib.Definitions;
-using CutsceneLib.Cutscenes.IntroCutscene.Net;
+using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 
-namespace CutsceneLib.Cutscenes.IntroCutscene.Scenes {
+namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 	partial class IntroCutsceneScene_00 : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
-		private void BeginShot01_ExteriorChat() {
-
-		}
-
-
-		////////////////
-
-		private void GetCam01_ExteriorChat(
-					IList<CameraMover> cams,
-					Action onCamStop,
-					Vector2 exteriorShipView ) {
+		private void GetCam02_Dungeon( IList<CameraMover> cams, Action onCamStop, Vector2 dungeonView ) {
 			int next = cams.Count;
 			var cam = new CameraMover(
 				name: "CutsceneLibIntro",
-				moveXFrom: (int)exteriorShipView.X,
-				moveYFrom: (int)exteriorShipView.Y,
-				moveXTo: (int)exteriorShipView.X,
-				moveYTo: (int)exteriorShipView.Y - ( 12 * 16 ),
-				toDuration: 60 * 3,
-				lingerDuration: 60 * 3,
+				moveXFrom: (int)dungeonView.X,
+				moveYFrom: (int)dungeonView.Y,
+				moveXTo: (int)dungeonView.X,
+				moveYTo: (int)dungeonView.Y - ( 4 * 16 ),
+				toDuration: 60 * 5,
+				lingerDuration: 0,
 				froDuration: 0,
 				onStop: () => {
 					onCamStop?.Invoke();
