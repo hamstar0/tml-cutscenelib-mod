@@ -12,13 +12,18 @@ using CutsceneLib.Definitions;
 
 namespace CutsceneLib.Logic {
 	public partial class CutsceneManager : ILoadable {
-		public bool CanBeginCutscene( CutsceneID cutsceneId, Player playsFor, out string result ) {
-			return this.CanBeginCutscene( cutsceneId, playsFor, out Cutscene _, out result );
+		public bool CanBeginCutscene( bool isAutoplay, CutsceneID cutsceneId, Player playsFor, out string result ) {
+			return this.CanBeginCutscene( isAutoplay, cutsceneId, playsFor, out Cutscene _, out result );
 		}
 
 		////
 
-		private bool CanBeginCutscene( CutsceneID cutsceneId, Player playsFor, out Cutscene cutscene, out string result ) {
+		private bool CanBeginCutscene(
+					bool isAutoplay,
+					CutsceneID cutsceneId,
+					Player playsFor,
+					out Cutscene cutscene,
+					out string result ) {
 			if( this.GetCurrentCutscene_Player( playsFor ) != null ) {
 				cutscene = null;
 				result = "Player "+playsFor.name+" ("+playsFor.whoAmI+") is already playing "+cutsceneId;
@@ -36,6 +41,11 @@ namespace CutsceneLib.Logic {
 			}
 
 			cutscene = cutsceneId.Create( playsFor );
+			if( isAutoplay && !cutscene.Autoplay ) {
+				result = "Cutscene " + cutsceneId + " does not support autoplay.";
+				return false;
+			}
+
 			return cutscene.CanBegin( out result );
 		}
 
@@ -43,14 +53,16 @@ namespace CutsceneLib.Logic {
 		////////////////
 
 		public bool TryBeginCutscene(
+					bool isAutoplay,
 					CutsceneID cutsceneId,
 					Player playsFor,
 					bool sync,
 					out string result ) {
-			if( !this.CanBeginCutscene(cutsceneId, playsFor, out Cutscene cutscene, out result) ) {
+			if( !this.CanBeginCutscene(isAutoplay, cutsceneId, playsFor, out Cutscene cutscene, out result) ) {
 				result = "Cannot play cutscene "+cutsceneId+": "+result;
 				return false;
 			}
+
 			return this.TryBeginCutscene( cutscene, cutscene.FirstSceneId, playsFor, sync, out result );
 		}
 		
@@ -115,7 +127,7 @@ LogHelpers.LogOnce("5b A");
 					CutsceneNetStart data,
 					Action<string> onSuccess,
 					Action<string> onFail ) {
-			if( !this.CanBeginCutscene(cutsceneId, playsFor, out Cutscene cutscene, out string result) ) {
+			if( !this.CanBeginCutscene(false, cutsceneId, playsFor, out Cutscene cutscene, out string result) ) {
 				onFail( "Cannot play cutscene " + cutsceneId + ": " + result );
 				return;
 			}

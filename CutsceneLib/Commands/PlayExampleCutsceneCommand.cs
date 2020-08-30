@@ -43,8 +43,8 @@ namespace CutsceneLib.Commands {
 			var cutMngr = CutsceneManager.Instance;
 			var introId = new CutsceneID( CutsceneLibMod.Instance, typeof(IntroCutscene) );
 
-			if( cutMngr.CanBeginCutscene(introId, caller.Player, out string result) ) {
-				if( cutMngr.TryBeginCutscene(introId, caller.Player, true, out result) ) {
+			if( cutMngr.CanBeginCutscene(false, introId, caller.Player, out string result) ) {
+				if( cutMngr.TryBeginCutscene(false, introId, caller.Player, true, out result) ) {
 					caller.Reply( result, Color.Lime );
 				} else {
 					caller.Reply( result, Color.Yellow );

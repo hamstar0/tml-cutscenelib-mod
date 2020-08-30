@@ -41,7 +41,7 @@ namespace CutsceneLib.Logic {
 						continue;
 					}
 
-					if( !this.TryBeginCutscene(cutsceneId, plr, true, out string result) ) {
+					if( !this.TryBeginCutscene(true, cutsceneId, plr, true, out string result) ) {
 						if( CutsceneLibConfig.Instance.DebugModeInfo ) {
 							LogHelpers.LogOnce( "Tried to begin cutscene: " + result );
 						}

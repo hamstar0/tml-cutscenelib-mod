@@ -20,11 +20,11 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 				char d = Path.DirectorySeparatorChar;
 				shipExterior = TileStructure.Load(
 					mod: CutsceneLibMod.Instance,
-					pathOfModFile: "ExampleCutscenes" + d + "IntroCutscene" + d + "Ship Exterior.dat"
+					pathOfModFile: "ExampleCutscene" + d + "IntroCutscene" + d + "Ship Exterior.dat"
 				);
 				shipInterior = TileStructure.Load(
 					mod: CutsceneLibMod.Instance,
-					pathOfModFile: "ExampleCutscenes" + d + "IntroCutscene" + d + "Ship Interior.dat"
+					pathOfModFile: "ExampleCutscene" + d + "IntroCutscene" + d + "Ship Interior.dat"
 				);
 				//LogHelpers.Log( "interior: "+ shipInterior.Bounds.ToString()+" ("+shipInterior.TileCount+")"
 				//	+", exterior: "+shipExterior.Bounds.ToString()+" ("+shipExterior.TileCount+")");

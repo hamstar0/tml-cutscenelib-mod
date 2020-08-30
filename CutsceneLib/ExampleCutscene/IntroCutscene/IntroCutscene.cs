@@ -27,6 +27,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			sceneType: typeof(IntroCutsceneScene_00)
 		);
 
+		public override bool Autoplay => false;
+
 
 		////
 

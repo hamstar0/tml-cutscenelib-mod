@@ -95,7 +95,7 @@ namespace CutsceneLib.Net {
 				return;
 			}
 
-			if( !mngr.CanBeginCutscene(cutsceneId, playsFor, out string result) ) {
+			if( !mngr.CanBeginCutscene(false, cutsceneId, playsFor, out string result) ) {
 				LogHelpers.Warn( "Cannot play cutscene " + cutsceneId + ": "+result );
 				return;
 			}
