@@ -6,10 +6,10 @@ using HamstarHelpers.Classes.TileStructure;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.World;
 using CutsceneLib.Definitions;
-using CutsceneLib.ExampleCutscenes.IntroCutscene.Net;
+using CutsceneLib.Cutscenes.IntroCutscene.Net;
 
 
-namespace CutsceneLib.ExampleCutscenes.IntroCutscene {
+namespace CutsceneLib.Cutscenes.IntroCutscene {
 	class IntroMovieSet : MovieSet {
 		internal static IntroMovieSet Create(
 					ref TileStructure shipExterior,

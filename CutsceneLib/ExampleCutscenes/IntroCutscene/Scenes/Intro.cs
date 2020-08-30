@@ -6,10 +6,10 @@ using Terraria.ID;
 using HamstarHelpers.Classes.CameraAnimation;
 using HamstarHelpers.Helpers.Debug;
 using CutsceneLib.Definitions;
-using CutsceneLib.ExampleCutscenes.IntroCutscene.Net;
+using CutsceneLib.Cutscenes.IntroCutscene.Net;
 
 
-namespace CutsceneLib.ExampleCutscenes.IntroCutscene.Scenes {
+namespace CutsceneLib.Cutscenes.IntroCutscene.Scenes {
 	partial class IntroCutsceneScene_00 : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
 		public override SceneID UniqueId { get; } = new SceneID(
 			mod: CutsceneLibMod.Instance,
