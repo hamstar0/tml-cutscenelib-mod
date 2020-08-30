@@ -32,7 +32,7 @@ namespace CutsceneLib {
 
 		public override void PostUpdateInput() {
 			if( Main.gameMenu ) { return; }
-			if( AMLConfig.Instance.DebugModeFreeMove ) { return; }
+			if( CutsceneLibConfig.Instance.DebugModeFreeMove ) { return; }
 
 			Cutscene nowCutscene = CutsceneManager.Instance?.GetCurrentCutscene_Player( Main.LocalPlayer );
 			if( nowCutscene?.IsSiezingControls() != true ) {

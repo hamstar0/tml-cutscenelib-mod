@@ -55,9 +55,9 @@ namespace CutsceneLib {
 		
 		public override void SyncPlayer( int toWho, int fromWho, bool newPlayer ) {
 			if( Main.netMode == NetmodeID.Server ) {
-				AMLPlayerDataNetData.SendToClients( this, toWho, fromWho );
+				PlayerDataNetData.SendToClients( this, toWho, fromWho );
 			} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
-				AMLPlayerDataNetData.SendToServer( this );
+				PlayerDataNetData.SendToServer( this );
 			}
 		}
 
@@ -68,16 +68,16 @@ namespace CutsceneLib {
 
 			if( isDesynced ) {
 				if( Main.netMode == NetmodeID.Server ) {
-					AMLPlayerDataNetData.SendToClients( this, -1, this.player.whoAmI );
+					PlayerDataNetData.SendToClients( this, -1, this.player.whoAmI );
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
-					AMLPlayerDataNetData.SendToServer( this );	// server only?
+					PlayerDataNetData.SendToServer( this );	// server only?
 				}
 			}
 		}
 
 		/////
 
-		internal void SyncFromNet( AMLPlayerDataNetData payload ) {
+		internal void SyncFromNet( PlayerDataNetData payload ) {
 			this.IsPlayerCutsceneLibCompat = payload.IsPlayerCutsceneLibCompat;
 			this.TriggeredCutsceneIDs_Player = new HashSet<CutsceneID>();
 

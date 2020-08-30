@@ -54,7 +54,7 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
-		internal abstract AMLCutsceneNetStart CreatePacketPayload_Internal( Cutscene cutscene );
+		internal abstract CutsceneNetStart CreatePacketPayload_Internal( Cutscene cutscene );
 
 
 		////////////////

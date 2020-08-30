@@ -31,12 +31,12 @@ namespace CutsceneLib.Definitions {
 
 		protected abstract SceneBase CreateScene( SceneID sceneId );
 
-		protected abstract SceneBase CreateSceneFromNetwork( SceneID sceneId, AMLCutsceneNetStart data );
+		protected abstract SceneBase CreateSceneFromNetwork( SceneID sceneId, CutsceneNetStart data );
 
 
 		////////////////
 
-		internal AMLCutsceneNetStart CreatePacketPayload() {
+		internal CutsceneNetStart CreatePacketPayload() {
 			return this.CurrentScene.CreatePacketPayload_Internal( this );
 		}
 
@@ -54,7 +54,7 @@ namespace CutsceneLib.Definitions {
 
 		internal void BeginCutsceneFromNetwork_Internal(
 					SceneID sceneId,
-					AMLCutsceneNetStart data,
+					CutsceneNetStart data,
 					Action<string> onSuccess,
 					Action<string> onFail ) {
 			this.CurrentScene = this.CreateSceneFromNetwork( sceneId, data );

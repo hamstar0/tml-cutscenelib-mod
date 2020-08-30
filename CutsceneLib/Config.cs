@@ -4,8 +4,8 @@ using Terraria.ModLoader.Config;
 
 
 namespace CutsceneLib {
-	class AMLConfig : ModConfig {
-		public static AMLConfig Instance => ModContent.GetInstance<AMLConfig>();
+	class CutsceneLibConfig : ModConfig {
+		public static CutsceneLibConfig Instance => ModContent.GetInstance<CutsceneLibConfig>();
 
 
 

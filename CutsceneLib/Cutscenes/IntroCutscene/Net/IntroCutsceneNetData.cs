@@ -7,7 +7,7 @@ using CutsceneLib.Net;
 
 namespace CutsceneLib.Cutscenes.IntroCutscene.Net {
 	[Serializable]
-	class IntroCutsceneNetData : AMLCutsceneNetStart {
+	class IntroCutsceneNetData : CutsceneNetStart {
 		public Vector2 ExteriorShipView;
 		public Vector2 InteriorShipView;
 

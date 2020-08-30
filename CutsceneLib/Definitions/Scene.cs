@@ -8,7 +8,7 @@ namespace CutsceneLib.Definitions {
 	public abstract partial class Scene<T, U, V> : SceneBase
 				where T : Cutscene
 				where U : MovieSet
-				where V : AMLCutsceneNetStart {
+				where V : CutsceneNetStart {
 		protected U Set;
 
 
@@ -22,7 +22,7 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
-		internal sealed override AMLCutsceneNetStart CreatePacketPayload_Internal( Cutscene cutscene ) {
+		internal sealed override CutsceneNetStart CreatePacketPayload_Internal( Cutscene cutscene ) {
 			return this.CreatePacketPayload( (T)cutscene );
 		}
 

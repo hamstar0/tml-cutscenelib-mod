@@ -23,9 +23,9 @@ namespace CutsceneLib.Definitions {
 
 			if( sync ) {
 				if( Main.netMode == NetmodeID.Server ) {
-					AMLCutsceneNetStart.SendToClients( cutscene: this, ignoreWho: -1 );
+					CutsceneNetStart.SendToClients( cutscene: this, ignoreWho: -1 );
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
-					AMLCutsceneNetStart.Broadcast( cutscene: this );
+					CutsceneNetStart.Broadcast( cutscene: this );
 				}
 			}
 		}
@@ -40,9 +40,9 @@ namespace CutsceneLib.Definitions {
 
 				if( sync ) {
 					if( Main.netMode == NetmodeID.MultiplayerClient ) {
-						AMLCutsceneNetStart.Broadcast( cutscene: this );
+						CutsceneNetStart.Broadcast( cutscene: this );
 					} else if( Main.netMode == NetmodeID.Server ) {
-						AMLCutsceneNetStart.SendToClients( cutscene: this, -1 );
+						CutsceneNetStart.SendToClients( cutscene: this, -1 );
 					}
 				}
 			} else {

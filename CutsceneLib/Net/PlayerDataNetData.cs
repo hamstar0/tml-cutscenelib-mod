@@ -11,15 +11,15 @@ using CutsceneLib.Definitions;
 
 namespace CutsceneLib.Net {
 	[Serializable]
-	class AMLPlayerDataNetData : NetIOBidirectionalPayload {
+	class PlayerDataNetData : NetIOBidirectionalPayload {
 		public static void SendToServer( CutsceneLibPlayer plrData ) {
-			var protocol = new AMLPlayerDataNetData( plrData );
+			var protocol = new PlayerDataNetData( plrData );
 
 			NetIO.SendToServer( protocol );
 		}
 
 		public static void SendToClients( CutsceneLibPlayer plrData, int toWho, int ignoreWho ) {
-			var protocol = new AMLPlayerDataNetData( plrData );
+			var protocol = new PlayerDataNetData( plrData );
 
 			NetIO.SendToClients( protocol, toWho, ignoreWho );
 		}
@@ -43,9 +43,9 @@ namespace CutsceneLib.Net {
 
 		////////////////
 
-		private AMLPlayerDataNetData() { }
+		private PlayerDataNetData() { }
 		
-		private AMLPlayerDataNetData( CutsceneLibPlayer myplayer ) {
+		private PlayerDataNetData( CutsceneLibPlayer myplayer ) {
 			var myworld = ModContent.GetInstance<CutsceneLibWorld>();
 			var cutMngr = CutsceneManager.Instance;
 			IEnumerable<Cutscene> activeCutscenes = cutMngr.GetActiveCutscenes_World();

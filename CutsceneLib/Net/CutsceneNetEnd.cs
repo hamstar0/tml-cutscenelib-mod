@@ -11,13 +11,13 @@ using CutsceneLib.Definitions;
 
 namespace CutsceneLib.Net {
 	[Serializable]
-	public class AMLCutsceneNetEnd : NetIOBroadcastPayload {
+	public class CutsceneNetEnd : NetIOBroadcastPayload {
 		public static void Broadcast( Cutscene cutscene ) {
 			if( Main.netMode != NetmodeID.MultiplayerClient ) {
 				throw new ModHelpersException("Not client");
 			}
 
-			var protocol = new AMLCutsceneNetEnd( cutscene );
+			var protocol = new CutsceneNetEnd( cutscene );
 
 			NetIO.Broadcast( protocol );
 		}
@@ -27,7 +27,7 @@ namespace CutsceneLib.Net {
 				throw new ModHelpersException( "Not server" );
 			}
 
-			var protocol = new AMLCutsceneNetEnd( cutscene );
+			var protocol = new CutsceneNetEnd( cutscene );
 
 			NetIO.SendToClients(
 				data: protocol,
@@ -47,9 +47,9 @@ namespace CutsceneLib.Net {
 
 		////////////////
 
-		protected AMLCutsceneNetEnd() { }
+		protected CutsceneNetEnd() { }
 
-		protected AMLCutsceneNetEnd( Cutscene cutscene ) {
+		protected CutsceneNetEnd( Cutscene cutscene ) {
 			this.PlaysForWho = cutscene.PlaysForWhom;
 			this.CutsceneModName = cutscene.UniqueId.ModName;
 			this.CutsceneClassFullName = cutscene.UniqueId.FullClassName;

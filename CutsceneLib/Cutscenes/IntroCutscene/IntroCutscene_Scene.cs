@@ -21,7 +21,7 @@ namespace CutsceneLib.Cutscenes.IntroCutscene {
 
 		////
 
-		protected override SceneBase CreateSceneFromNetwork( SceneID sceneId, AMLCutsceneNetStart data ) {
+		protected override SceneBase CreateSceneFromNetwork( SceneID sceneId, CutsceneNetStart data ) {
 			if( sceneId.Equals(this.FirstSceneId) ) {
 				return this.CreateIntroSceneFromNetwork( data );
 			}
@@ -43,7 +43,7 @@ namespace CutsceneLib.Cutscenes.IntroCutscene {
 
 		////
 
-		private SceneBase CreateIntroSceneFromNetwork( AMLCutsceneNetStart data ) {
+		private SceneBase CreateIntroSceneFromNetwork( CutsceneNetStart data ) {
 			IntroMovieSet set = IntroMovieSet.Create(
 				ref this._ShipExterior,
 				ref this._ShipInterior,
