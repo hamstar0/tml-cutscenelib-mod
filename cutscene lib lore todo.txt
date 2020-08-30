@@ -1,0 +1,83 @@
+v1
+-	@MH: Set PingProtocol to be "verbose" (attribute?)
+-	Add debug info
+-	Finish implementing cutscene mechanics
+	-	Cleanup loaded set after all scenes traversed
+	-	Implement UI for dialogue choices responses
+-	Create intro cutscene
+	-	Implement dialogue
+	-	Implement actors
+		-	...
+		-	Spawn pirates
+		-	Kill guides with cannon fire
+		-	Apply behaviors to guides
+		-	Spawn guides on ship deck
+		-	@Plan
+			1	Populate ship deck with guides
+				-	Give guides different colors (and sizes?)
+				-	Give 1 guide a pair of binoculars and hold its position and frame
+			3	Pirates!
+				-	Spawn cannon ball projectiles that kill guides
+				-	Pirates leap up onto deck
+			4	Spawn player and some guides below deck, "conversing"
+			5	Pirates start attacking below deck
+			6	Spawn captain, have a pirate "converse" with them
+			7	Ambush
+				-	Arrange player and surviving guide in ambush position
+				-	Captain walks up to survivors
+			8	Player and guide moved to raft, pirates celebrate on deck
+			9	Cleanup
+	-	Silence music during cutscene
+	-	Add debug mode to enable map view during cutscene
+	-	MP: Implement cutscene non-primary viewers (receive movie set from network)
+	-	Set chat command to activate cutscene
+	-	Rename mod to Cutscene Lib
+
+	-	Fixes
+		-	Adjust for resolution
+		-	Fix camera position on ship interior
+		-	Control clothier AI
+		-	Report location of dungeon to clients
+
+		-	Ensure MP (ensure chunks are loaded)
+			-	Allow client to abort cutscene for all players and server (if allowed)
+			-	After set load, server conveys vectors for set; skip loading set for client
+		-	Cleanup data for exited players
+-	Can generic params be forced to be non-abstract?
+		-	Cutscene mode doesnt terminate
+		-	Ship exterior view is weird
+		-	Ship interior is offset lots
+	-	Implement cutscene sync for players
+	-	Implement scene sequence + camera
+		-	Implement sequence
+		-	@Plan
+			1	Bring ship exterior into view, linger
+			2	View dungeon briefly, play sound of explosions
+			3	View ship exterior again, stuff is now happening
+			4	View ship interior, stuff is happening
+			5	Player gains control for 20s
+			6	View ship exterior
+			7	View ship interior
+			8	Modify set to add raft in front of ship, view exterior with raft
+			9	Fade to black, cleanup sets
+-	Fix set loading
+-	Implement cutscene mechanics
+	-	Implement UI for dialogue
+	-	Implement basic scene progression
+	-	Define scene concept
+	-	Cutscene mode: Lock player, npc spawns, etc.
+		-	Stop NPC spawns
+		-	Hide UI
+		-	Revert map mode, camera mode
+		-	Set player invincibility
+		-	Lock controls (PlayerInput.Triggers.Current.KeyStatus)
+	-	@Test loading sets
+	-	Load set for cutscene
+	-	Load set data in session (via. TileStructure)
+	-	Create set
+		-	Ship interior
+		-	Ship exterior
+-	Implement 'cutscene session' (world has no boss kills)
+	-	Implement activation and rememberance (no kills, default hp/mp, AM-genned, no lore progress)
+-	Setup project
+-	@Implement TileStructure class and commands (via. MH)
