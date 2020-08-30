@@ -16,10 +16,6 @@ namespace CutsceneLib {
 
 		////////////////
 
-		public bool IsPlayerCutsceneLibCompat { get; internal set; } = false;
-
-		////
-
 		public override bool CloneNewInstances => false;
 
 
@@ -29,23 +25,17 @@ namespace CutsceneLib {
 		public override void clientClone( ModPlayer clientClone ) {
 			var myclone = clientClone as CutsceneLibPlayer;
 			myclone.TriggeredCutsceneIDs_Player = new HashSet<CutsceneID>( this.TriggeredCutsceneIDs_Player );
-			myclone.IsPlayerCutsceneLibCompat = this.IsPlayerCutsceneLibCompat;
 		}
 
 
 		////////////////
 
 		public override void Load( TagCompound tag ) {
-			if( tag.ContainsKey( "IsPlayerCutsceneLibCompat" ) ) {
-				this.IsPlayerCutsceneLibCompat = true;
-				CutsceneManager.Instance?.Load_Player( this, tag );
-			}
+			CutsceneManager.Instance?.Load_Player( this, tag );
 		}
 
 		public override TagCompound Save() {
-			var tag = new TagCompound {
-				{ "IsPlayerCutsceneLibCompat", this.IsPlayerCutsceneLibCompat },
-			};
+			var tag = new TagCompound { };
 			CutsceneManager.Instance.Save_Player( this, tag );
 			return tag;
 		}
@@ -63,8 +53,7 @@ namespace CutsceneLib {
 
 		public override void SendClientChanges( ModPlayer clientPlayer ) {
 			var myclone = clientPlayer as CutsceneLibPlayer;
-			bool isDesynced = myclone.IsPlayerCutsceneLibCompat != this.IsPlayerCutsceneLibCompat
-				|| !this.TriggeredCutsceneIDs_Player.SetEquals( myclone.TriggeredCutsceneIDs_Player );
+			bool isDesynced = !this.TriggeredCutsceneIDs_Player.SetEquals( myclone.TriggeredCutsceneIDs_Player );
 
 			if( isDesynced ) {
 				if( Main.netMode == NetmodeID.Server ) {
@@ -78,7 +67,6 @@ namespace CutsceneLib {
 		/////
 
 		internal void SyncFromNet( PlayerDataNetData payload ) {
-			this.IsPlayerCutsceneLibCompat = payload.IsPlayerCutsceneLibCompat;
 			this.TriggeredCutsceneIDs_Player = new HashSet<CutsceneID>();
 
 			int len = payload.ActivatedCutsceneModNames_Player.Length;

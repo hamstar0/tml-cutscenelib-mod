@@ -13,18 +13,8 @@ namespace CutsceneLib {
 	public partial class CutsceneLibMod : Mod {
 		public override void PostUpdateEverything() {
 			if( !Main.gameMenu || Main.netMode == NetmodeID.Server ) {
-				this.UpdateCutscenes_Internal();
+				CutsceneManager.Instance.Update_Internal();
 			}
-		}
-
-		////
-
-		private void UpdateCutscenes_Internal() {
-			if( ModContent.GetInstance<CutsceneLibWorld>()?.IsThisWorldCutsceneLibCompat != true ) {
-				return;
-			}
-
-			CutsceneManager.Instance.Update_Internal();
 		}
 
 

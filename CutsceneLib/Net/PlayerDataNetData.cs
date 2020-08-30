@@ -30,8 +30,6 @@ namespace CutsceneLib.Net {
 
 		public int FromWho;
 
-		public bool IsPlayerCutsceneLibCompat = false;
-
 		public string[] CurrentCutsceneModNames_World;
 		public string[] CurrentCutsceneNames_World;
 		public string[] ActivatedCutsceneModNames_World;
@@ -51,7 +49,6 @@ namespace CutsceneLib.Net {
 			IEnumerable<Cutscene> activeCutscenes = cutMngr.GetActiveCutscenes_World();
 
 			this.FromWho = myplayer.player.whoAmI;
-			this.IsPlayerCutsceneLibCompat = myplayer.IsPlayerCutsceneLibCompat;
 
 			this.CurrentCutsceneModNames_World = new string[ activeCutscenes.Count() ];
 			this.CurrentCutsceneNames_World = new string[ activeCutscenes.Count() ];

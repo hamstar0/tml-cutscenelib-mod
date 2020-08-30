@@ -61,9 +61,7 @@ namespace CutsceneLib.Definitions {
 
 		/// <summary></summary>
 		/// <returns>`true` signifies scene has ended.</returns>
-		internal virtual bool UpdateScene_Internal( Cutscene parent ) {
-			return false;
-		}
+		internal abstract bool UpdateScene_Internal( Cutscene parent );
 
 
 		////////////////

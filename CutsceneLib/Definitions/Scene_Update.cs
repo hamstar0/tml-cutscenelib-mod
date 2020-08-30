@@ -11,9 +11,6 @@ namespace CutsceneLib.Definitions {
 		/// <summary></summary>
 		/// <returns>`true` signifies scene has ended.</returns>
 		internal sealed override bool UpdateScene_Internal( Cutscene parent ) {
-			if( base.UpdateScene_Internal( parent ) ) {
-				return true;
-			}
 			return this.Update( (T)parent );
 		}
 

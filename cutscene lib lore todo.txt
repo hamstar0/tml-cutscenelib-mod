@@ -39,6 +39,7 @@ v1
 		-	Control clothier AI
 		-	Report location of dungeon to clients
 
+
 		-	Ensure MP (ensure chunks are loaded)
 			-	Allow client to abort cutscene for all players and server (if allowed)
 			-	After set load, server conveys vectors for set; skip loading set for client

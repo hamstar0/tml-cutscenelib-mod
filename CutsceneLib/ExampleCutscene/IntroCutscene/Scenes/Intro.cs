@@ -72,8 +72,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 				return false;
 			}
 
-			var animCam = CameraMover.Current;
-			if( animCam == null || !animCam.Name.StartsWith("CutsceneLibIntro") || !animCam.IsAnimating() ) {
+			var cam = CameraMover.Current;
+			if( cam == null || !cam.Name.StartsWith("CutsceneLibIntro") || !cam.IsAnimating() ) {
 				return true;
 			}
 
