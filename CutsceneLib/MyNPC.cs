@@ -29,7 +29,8 @@ namespace CutsceneLib {
 		////
 
 		public override bool PreAI( NPC npc ) {
-			Cutscene nowCutscene = CutsceneManager.Instance?.GetCurrentCutscene_Player( Main.LocalPlayer );
+			var cutMngr = CutsceneManager.Instance;
+			Cutscene nowCutscene = cutMngr?.GetCurrentCutscene_Player( Main.LocalPlayer );
 			if( nowCutscene == null ) {
 				return base.PreAI( npc );
 			}
@@ -38,6 +39,8 @@ namespace CutsceneLib {
 				npc.active = false;
 				npc.life = 0;
 			}
+
+			cutMngr.Update_NPC_Internal( npc );
 			
 			return base.PreAI( npc );
 		}

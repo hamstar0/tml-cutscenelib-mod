@@ -7,7 +7,7 @@ using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Classes.Loadable;
 using HamstarHelpers.Helpers.Debug;
 using CutsceneLib.Definitions;
-
+using System.Collections.Generic;
 
 namespace CutsceneLib.Logic {
 	public partial class CutsceneManager : ILoadable {
@@ -56,7 +56,7 @@ namespace CutsceneLib.Logic {
 
 
 		////////////////
-
+		
 		internal void Update_Player_Internal( CutsceneLibPlayer myplayer ) {
 			Cutscene cutscene = this.GetCurrentCutscene_Player( myplayer.player );
 			if( cutscene == null ) {
@@ -73,6 +73,16 @@ namespace CutsceneLib.Logic {
 					Main.mapStyle = 0;
 					CaptureManager.Instance.Active = false;
 				}
+			}
+		}
+
+
+		////////////////
+
+		internal void Update_NPC_Internal( NPC npc ) {
+			IEnumerable<Cutscene> cutscenes = this.GetActiveCutscenes_World();
+			foreach( Cutscene cutscene in cutscenes ) {
+				cutscene.UpdateNPC( npc );
 			}
 		}
 	}

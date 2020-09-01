@@ -28,5 +28,7 @@ namespace CutsceneLib.Definitions {
 		/// <summary></summary>
 		/// <returns>`true` signifies current scene has ended, and should advance.</returns>
 		protected abstract bool Update();
+
+		protected virtual void UpdateNPC( NPC npc ) { }
 	}
 }

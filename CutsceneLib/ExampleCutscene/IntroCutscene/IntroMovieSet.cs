@@ -47,6 +47,11 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 					shipExterior.Bounds.Height + shipInterior.Bounds.Height + 20
 				);
 				return null;
+			} else {
+				//extLeft += shipExterior.Bounds.Width / 2;
+				//intLeft += shipInterior.Bounds.Width / 2;
+				extTop += -8;
+				intTop += 32;
 			}
 
 			chunkRange = default( Rectangle );
@@ -145,22 +150,14 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		private IntroMovieSet( IntroCutsceneNetData data ) {
 			this.ExteriorShipView = data.ExteriorShipView;
 			this.InteriorShipView = data.InteriorShipView;
+
+			Main.dungeonX = data.DungeonX;
+			Main.dungeonY = data.DungeonY;
 		}
 
-		private IntroMovieSet(
-					int extWid,
-					int extLeft,
-					int extTop,
-					int intWid,
-					int intLeft,
-					int intTop ) {
+		private IntroMovieSet( int extLeft, int extTop, int intLeft, int intTop ) {
 			this.ExteriorShipView = new Vector2( extLeft * 16, extTop * 16 );
-			this.ExteriorShipView.X += extWid * 8;    // (wid*16) / 2
-			this.ExteriorShipView.Y += -8 * 16;
-
 			this.InteriorShipView = new Vector2( intLeft * 16, intTop * 16 );
-			this.InteriorShipView.X += intWid * 8;    // (wid*16) / 2
-			this.InteriorShipView.Y += 32 * 16;
 		}
 
 		private IntroMovieSet(
@@ -170,13 +167,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 					int extTop,
 					int intLeft,
 					int intTop,
-					bool isFlipped ) : this(
-						shipExterior.Bounds.Width,
-						extLeft,
-						extTop,
-						shipInterior.Bounds.Width,
-						intLeft,
-						intTop ) {
+					bool isFlipped
+				) : this( extLeft, extTop, intLeft, intTop ) {
 			shipExterior.PaintToWorld(
 				leftTileX: extLeft,
 				topTileY: extTop,
