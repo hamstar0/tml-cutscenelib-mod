@@ -17,6 +17,8 @@ v1
 		-	Kill guides with cannon fire
 		-	Apply behaviors to guides
 		-	Spawn guides on ship deck
+
+
 		-	@Plan
 			1	Populate ship deck with guides
 				-	Give guides different colors (and sizes?)
@@ -33,10 +35,6 @@ v1
 			8	Player and guide moved to raft, pirates celebrate on deck
 			9	Cleanup
 	-	Silence music during cutscene
-	-	Add debug mode to enable map view during cutscene
-	-	Ensure cutscenes can't be played while in progress for others
-
-
 	-	MP: Implement cutscene non-primary viewers
 		-	Defer to server state for non-primary viewers
 	-	Set chat command to activate cutscene

@@ -50,9 +50,6 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 			dungeonView.X += isShipOnLeft ? (-32 * 16) : (32 * 16);
 			dungeonView.Y += -32 * 16;
 
-			int extShipViewScrollY = (int)exteriorShipView.Y - (6 * 16);
-			interiorShipView.Y = interiorShipView.Y - (12f * 16f);
-
 			this.BeginShot00_Title( parent );
 			
 			this.GetCam00_Title( cams, this.BeginShot01_ExteriorChat );
@@ -78,6 +75,17 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 			}
 
 			return false;
+		}
+
+		////
+
+		public override void UpdateNPC( NPC npc ) {
+			if( npc.type == NPCID.OldMan ) {
+				npc.ai[0] = 0f;
+				npc.ai[1] = 0f;
+				npc.ai[2] = 0f;
+				npc.ai[3] = 0f;
+			}
 		}
 
 

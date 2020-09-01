@@ -61,17 +61,5 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			result = "Success.";
 			return true;
 		}
-
-
-		////////////////
-
-		protected override void UpdateNPC( NPC npc ) {
-			if( npc.type == NPCID.OldMan ) {
-				npc.ai[0] = 0f;
-				npc.ai[1] = 0f;
-				npc.ai[2] = 0f;
-				npc.ai[3] = 0f;
-			}
-		}
 	}
 }

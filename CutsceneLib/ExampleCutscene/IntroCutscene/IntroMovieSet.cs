@@ -37,7 +37,6 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 
 			isOcean = IntroMovieSet.GetSceneCoordinates( shipExterior.Bounds.Width, out extLeft, out extTop, out isFlipped, out result );
 			isOcean = IntroMovieSet.GetSceneCoordinates( shipInterior.Bounds.Width, out intLeft, out intTop, out isFlipped, out result );
-			intTop = Math.Max( intTop - 100, 40 );
 
 			if( !isOcean ) {
 				chunkRange = new Rectangle(
@@ -47,12 +46,12 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 					shipExterior.Bounds.Height + shipInterior.Bounds.Height + 20
 				);
 				return null;
-			} else {
-				//extLeft += shipExterior.Bounds.Width / 2;
-				//intLeft += shipInterior.Bounds.Width / 2;
-				extTop += -8;
-				intTop += 32;
 			}
+
+			//extLeft += shipExterior.Bounds.Width / 2;
+			//intLeft += shipInterior.Bounds.Width / 2;
+			//extTop -= 8;
+			intTop = Math.Max( intTop - 160, 41 );
 
 			chunkRange = default( Rectangle );
 			return new IntroMovieSet( shipExterior, shipInterior, extLeft, extTop, intLeft, intTop, isFlipped );
@@ -140,6 +139,11 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 
 		////////////////
 
+		public int ExteriorTileLeft;
+		public int ExteriorTileTop;
+		public int InteriorTileLeft;
+		public int InteriorTileTop;
+
 		public Vector2 ExteriorShipView;
 		public Vector2 InteriorShipView;
 
@@ -156,8 +160,16 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		}
 
 		private IntroMovieSet( int extLeft, int extTop, int intLeft, int intTop ) {
+			this.ExteriorTileLeft = extLeft;
+			this.ExteriorTileTop = extTop;
+			this.InteriorTileLeft = intLeft;
+			this.InteriorTileTop = intTop;
+
 			this.ExteriorShipView = new Vector2( extLeft * 16, extTop * 16 );
+			this.ExteriorShipView.Y -= 12f * 16f;
 			this.InteriorShipView = new Vector2( intLeft * 16, intTop * 16 );
+			this.InteriorShipView.X += 16f * 16f;
+			this.InteriorShipView.Y += 12f * 16f;
 		}
 
 		private IntroMovieSet(

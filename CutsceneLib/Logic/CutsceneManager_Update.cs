@@ -82,7 +82,7 @@ namespace CutsceneLib.Logic {
 		internal void Update_NPC_Internal( NPC npc ) {
 			IEnumerable<Cutscene> cutscenes = this.GetActiveCutscenes_World();
 			foreach( Cutscene cutscene in cutscenes ) {
-				cutscene.UpdateNPC( npc );
+				cutscene.UpdateNPC_Internal( npc );
 			}
 		}
 	}

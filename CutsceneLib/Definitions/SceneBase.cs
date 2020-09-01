@@ -83,6 +83,11 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
+		public virtual void UpdateNPC( NPC npc ) { }
+
+
+		////////////////
+
 		public virtual void DrawInterface() { }
 	}
 }

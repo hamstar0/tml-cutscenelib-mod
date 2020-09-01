@@ -18,6 +18,8 @@ namespace CutsceneLib.Definitions {
 
 		////
 
-		protected virtual void UpdateNPC( NPC npc ) { }
+		internal void UpdateNPC_Internal( NPC npc ) {
+			this.CurrentScene?.UpdateNPC( npc );
+		}
 	}
 }
