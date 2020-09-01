@@ -1,3 +1,8 @@
+Future
+-	Allow players to have their own cutscenes
+
+
+
 v1
 -	@MH: Set PingProtocol to be "verbose" (attribute?)
 -	Add debug info
@@ -29,8 +34,11 @@ v1
 			9	Cleanup
 	-	Silence music during cutscene
 	-	Add debug mode to enable map view during cutscene
-	-	MP: Implement cutscene non-primary viewers (receive movie set from network)
+	-	Ensure cutscenes can't be played while in progress for others
 
+
+	-	MP: Implement cutscene non-primary viewers
+		-	Defer to server state for non-primary viewers
 	-	Set chat command to activate cutscene
 	-	Rename mod to Cutscene Lib
 	-	Fixes

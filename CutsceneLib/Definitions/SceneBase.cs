@@ -11,7 +11,7 @@ namespace CutsceneLib.Definitions {
 
 		////
 
-		public bool DefersToHostForSync { get; }
+		public bool PrimaryViewerDefersToHostForSync { get; }
 
 
 		////////////////
@@ -22,12 +22,12 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 		
-		protected SceneBase( bool defersToHostForSync ) {
+		protected SceneBase( bool primaryViewerDefersToHostForSync ) {
 			if( !this.ValidateSceneType(this.GetType()) ) {
 				throw new ModHelpersException( "Invalid Scene type "+this.GetType().Name );
 			}
 
-			this.DefersToHostForSync = defersToHostForSync;
+			this.PrimaryViewerDefersToHostForSync = primaryViewerDefersToHostForSync;
 		}
 
 		////

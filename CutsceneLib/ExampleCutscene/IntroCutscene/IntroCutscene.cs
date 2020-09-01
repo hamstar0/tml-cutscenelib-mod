@@ -27,7 +27,13 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			sceneType: typeof(IntroCutsceneScene_00)
 		);
 
-		public override bool Autoplay => false;
+		////
+
+		public override bool CanAutoplay => false;
+
+		public override bool CanReplayPerWorld => true;
+
+		public override bool CanReplayPerPlayer => false;
 
 
 		////
@@ -58,10 +64,6 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 
 
 		////////////////
-
-		protected override bool Update() {
-			return false;
-		}
 
 		protected override void UpdateNPC( NPC npc ) {
 			if( npc.type == NPCID.OldMan ) {

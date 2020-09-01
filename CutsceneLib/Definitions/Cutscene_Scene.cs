@@ -9,8 +9,14 @@ using CutsceneLib.Net;
 namespace CutsceneLib.Definitions {
 	public abstract partial class Cutscene {
 		public bool CanAdvanceCurrentScene() {
-			return ( this.CurrentScene.DefersToHostForSync && Main.netMode == NetmodeID.Server )
-				|| ( !this.CurrentScene.DefersToHostForSync && Main.netMode != NetmodeID.Server );
+			if( Main.netMode == NetmodeID.Server ) {
+				return this.CurrentScene.PrimaryViewerDefersToHostForSync;
+			} else {
+				if( this.PlaysForWhom == Main.myPlayer ) {
+					return !this.CurrentScene.PrimaryViewerDefersToHostForSync;
+				}
+				return false;
+			}
 		}
 
 

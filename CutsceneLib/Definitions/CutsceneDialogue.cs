@@ -6,13 +6,13 @@ using Terraria.ModLoader;
 using HamstarHelpers.Classes.Loadable;
 using HamstarHelpers.Classes.UI.Elements;
 using HamstarHelpers.Classes.UI.Theme;
-using HamstarHelpers.Services.UI.FreeHUD;
 using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Services.UI.FreeHUD;
 
 
 namespace CutsceneLib.Definitions {
 	public class CutsceneDialogue : ILoadable {
-		protected UIThemedTextPanel DialogueDisplay;
+		protected UIThemedTextPanel DialogueElem;
 
 
 		////////////////
@@ -41,7 +41,7 @@ namespace CutsceneLib.Definitions {
 
 		public CutsceneDialogue( string dialogue, IList<CutsceneDialogue> choices, Func<bool> onChoice ) {
 			var singleton = ModContent.GetInstance<CutsceneDialogue>();
-			this.DialogueDisplay = singleton.DialogueDisplay;
+			this.DialogueElem = singleton.DialogueElem;
 
 			this.CurrentChoice = this;
 			this.Dialogue = dialogue;
@@ -56,10 +56,10 @@ namespace CutsceneLib.Definitions {
 
 		void ILoadable.OnPostModsLoad() {
 			if( Main.netMode != NetmodeID.Server ) {
-				this.DialogueDisplay = new UIThemedTextPanel( UITheme.Vanilla, false, "" );
-				this.DialogueDisplay.Hide();
+				this.DialogueElem = new UIThemedTextPanel( UITheme.Vanilla, false, "" );
+				this.DialogueElem.Hide();
 
-				FreeHUD.AddElement( "CutsceneDialogue", this.DialogueDisplay );
+				FreeHUD.AddElement( "CutsceneDialogue", this.DialogueElem );
 			}
 		}
 

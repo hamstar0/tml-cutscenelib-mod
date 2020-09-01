@@ -11,7 +11,14 @@ namespace CutsceneLib.Definitions {
 
 		public abstract SceneID FirstSceneId { get; }
 
-		public abstract bool Autoplay { get; }
+		////
+
+		public abstract bool CanAutoplay { get; }
+
+		public abstract bool CanReplayPerWorld { get; }
+
+		public abstract bool CanReplayPerPlayer { get; }
+
 
 		////
 
