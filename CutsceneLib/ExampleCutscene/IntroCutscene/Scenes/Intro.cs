@@ -32,13 +32,6 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 
 		////////////////
 
-		protected override IntroCutsceneNetData CreatePacketPayload( IntroCutscene cutscene ) {
-			return new IntroCutsceneNetData( cutscene, this.Set );
-		}
-
-
-		////////////////
-
 		protected override void OnBegin( IntroCutscene parent ) {
 			var cams = new List<CameraMover>();
 			Vector2 exteriorShipView = this.Set.ExteriorShipView;

@@ -1,16 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using HamstarHelpers.Classes.TileStructure;
 using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.Tiles;
+using HamstarHelpers.Classes.Tiles.TilePattern;
 using HamstarHelpers.Helpers.World;
 using CutsceneLib.Definitions;
 using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene {
-	class IntroMovieSet : MovieSet {
+	partial class IntroMovieSet : MovieSet {
 		internal static IntroMovieSet Create(
 					ref TileStructure shipExterior,
 					ref TileStructure shipInterior,
@@ -143,6 +147,9 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		public int ExteriorTileTop;
 		public int InteriorTileLeft;
 		public int InteriorTileTop;
+		public int ExteriorDeckWidth;
+		public int ExteriorDeckX;
+		public int ExteriorDeckY;
 
 		public Vector2 ExteriorShipView;
 		public Vector2 InteriorShipView;
@@ -187,15 +194,41 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 				paintAir: false,
 				respectLiquids: true,
 				flipHorizontally: isFlipped,
-				flipVertically: false );
-
+				flipVertically: false
+			);
 			shipInterior.PaintToWorld(
 				leftTileX: intLeft,
 				topTileY: intTop,
 				paintAir: false,
 				respectLiquids: true,
 				flipHorizontally: isFlipped,
-				flipVertically: false );
+				flipVertically: false
+			);
+
+			//
+
+			var nonDeckPattern = new TilePattern( new TilePatternBuilder {
+				IsNotAnyOfType = new HashSet<int> { TileID.Platforms }
+			} );
+			
+			this.ExteriorDeckWidth = TileFinderHelpers.GetFloorWidth(
+				nonFloorPattern: nonDeckPattern,
+				tileX: extLeft,
+				tileY: extTop,
+				maxFallRange: 50,
+				floorX: out this.ExteriorDeckX,
+				floorY: out this.ExteriorDeckY
+			);
+
+			//
+
+			int x = this.ExteriorDeckX + (this.ExteriorDeckWidth / 2);
+			int y = this.ExteriorDeckY - 3;
+
+			int npcWho = NPC.NewNPC( x, y, NPCID.Guide );
+			if( Main.netMode != NetmodeID.SinglePlayer ) {
+				NetMessage.SendData( MessageID.SyncNPC, -1, -1, null, npcWho );
+			}
 		}
 	}
 }

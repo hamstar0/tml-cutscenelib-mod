@@ -51,7 +51,7 @@ namespace CutsceneLib.Net {
 
 		protected CutsceneNetStart() { }
 
-		protected CutsceneNetStart( Cutscene cutscene ) {
+		protected CutsceneNetStart( Cutscene cutscene, MovieSet set ) {
 			this.PlaysForWho = cutscene.PlaysForWhom;
 			this.CutsceneModName = cutscene.UniqueId.ModName;
 			this.CutsceneClassFullName = cutscene.UniqueId.FullClassName;

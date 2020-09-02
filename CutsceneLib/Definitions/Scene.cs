@@ -2,6 +2,7 @@
 using Terraria;
 using HamstarHelpers.Classes.Errors;
 using CutsceneLib.Net;
+using HamstarHelpers.Helpers.DotNET.Reflection;
 
 
 namespace CutsceneLib.Definitions {
@@ -28,7 +29,15 @@ namespace CutsceneLib.Definitions {
 
 		////
 
-		protected abstract V CreatePacketPayload( T cutscene );
+		protected V CreatePacketPayload( T cutscene ) {
+			return Activator.CreateInstance(
+				type: typeof( V ),
+				bindingAttr: ReflectionHelpers.MostAccess,
+				binder: null,
+				args: new object[] { cutscene, this.Set },
+				culture: null
+			) as V;
+		}
 
 
 		////////////////
