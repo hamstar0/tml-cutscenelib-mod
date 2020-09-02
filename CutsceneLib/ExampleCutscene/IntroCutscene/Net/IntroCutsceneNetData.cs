@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
 using HamstarHelpers.Helpers.Debug;
@@ -13,6 +14,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Net {
 		public int ExteriorDeckWidth;
 		public int ExteriorDeckX;
 		public int ExteriorDeckY;
+
+		public int[] ExteriorCrewNPCs;
 
 		public int DungeonX;
 		public int DungeonY;
@@ -29,6 +32,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Net {
 			this.ExteriorDeckWidth = set.ExteriorDeckWidth;
 			this.ExteriorDeckX = set.ExteriorDeckX;
 			this.ExteriorDeckY = set.ExteriorDeckY;
+
+			this.ExteriorCrewNPCs = set.ExteriorCrewNPCs.ToArray();
 
 			this.DungeonX = Main.dungeonX;
 			this.DungeonY = Main.dungeonY;

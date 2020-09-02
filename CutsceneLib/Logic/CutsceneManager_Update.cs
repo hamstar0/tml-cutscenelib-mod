@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using Terraria;
 using Terraria.ID;
 using Terraria.Graphics.Capture;
@@ -7,7 +8,7 @@ using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Classes.Loadable;
 using HamstarHelpers.Helpers.Debug;
 using CutsceneLib.Definitions;
-using System.Collections.Generic;
+
 
 namespace CutsceneLib.Logic {
 	public partial class CutsceneManager : ILoadable {
@@ -66,12 +67,14 @@ namespace CutsceneLib.Logic {
 			myplayer.player.immune = true;
 			myplayer.player.immuneTime = 2;
 
-			if( Main.netMode != NetmodeID.Server ) {
-				if( myplayer.player.whoAmI == Main.myPlayer ) {
-					//Main.mapFullscreen = false;
-					//Main.mapEnabled = false;
-					Main.mapStyle = 0;
-					CaptureManager.Instance.Active = false;
+			if( !CutsceneLibConfig.Instance.DebugModeFreeMove ) {
+				if( Main.netMode != NetmodeID.Server ) {
+					if( myplayer.player.whoAmI == Main.myPlayer ) {
+						//Main.mapFullscreen = false;
+						//Main.mapEnabled = false;
+						Main.mapStyle = 0;
+						CaptureManager.Instance.Active = false;
+					}
 				}
 			}
 		}

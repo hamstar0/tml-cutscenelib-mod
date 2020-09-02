@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
-using System.IO;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -15,60 +15,6 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 	partial class IntroMovieSet : MovieSet {
-		internal static IntroMovieSet Create(
-					ref TileStructure shipExterior,
-					ref TileStructure shipInterior,
-					out Rectangle chunkRange,
-					out string result ) {
-			if( shipInterior == null ) {
-				char d = Path.DirectorySeparatorChar;
-				shipExterior = TileStructure.Load(
-					mod: CutsceneLibMod.Instance,
-					pathOfModFile: "ExampleCutscene" + d + "IntroCutscene" + d + "Ship Exterior.dat"
-				);
-				shipInterior = TileStructure.Load(
-					mod: CutsceneLibMod.Instance,
-					pathOfModFile: "ExampleCutscene" + d + "IntroCutscene" + d + "Ship Interior.dat"
-				);
-				//LogHelpers.Log( "interior: "+ shipInterior.Bounds.ToString()+" ("+shipInterior.TileCount+")"
-				//	+", exterior: "+shipExterior.Bounds.ToString()+" ("+shipExterior.TileCount+")");
-			}
-
-			int extLeft, extTop;
-			int intLeft, intTop;
-			bool isFlipped;
-			bool isOcean;
-
-			isOcean = IntroMovieSet.GetSceneCoordinates( shipExterior.Bounds.Width, out extLeft, out extTop, out isFlipped, out result );
-			isOcean = IntroMovieSet.GetSceneCoordinates( shipInterior.Bounds.Width, out intLeft, out intTop, out isFlipped, out result );
-
-			if( !isOcean ) {
-				chunkRange = new Rectangle(
-					intLeft,
-					41,
-					Math.Max( shipExterior.Bounds.Width, shipInterior.Bounds.Width ),
-					shipExterior.Bounds.Height + shipInterior.Bounds.Height + 20
-				);
-				return null;
-			}
-
-			//extLeft += shipExterior.Bounds.Width / 2;
-			//intLeft += shipInterior.Bounds.Width / 2;
-			//extTop -= 8;
-			intTop = Math.Max( intTop - 160, 41 );
-
-			chunkRange = default( Rectangle );
-			return new IntroMovieSet( shipExterior, shipInterior, extLeft, extTop, intLeft, intTop, isFlipped );
-		}
-
-
-		internal static IntroMovieSet Create( IntroCutsceneNetData data ) {
-			return new IntroMovieSet( data );
-		}
-
-
-		////////////////
-
 		public static bool GetSceneCoordinates(
 					int width,
 					out int left,
@@ -151,6 +97,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		public int ExteriorDeckX;
 		public int ExteriorDeckY;
 
+		public IList<int> ExteriorCrewNPCs = new List<int>();
+
 		public Vector2 ExteriorShipView;
 		public Vector2 InteriorShipView;
 
@@ -161,6 +109,11 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		private IntroMovieSet( IntroCutsceneNetData data ) {
 			this.ExteriorShipView = data.ExteriorShipView;
 			this.InteriorShipView = data.InteriorShipView;
+
+			this.ExteriorDeckX = data.ExteriorDeckX;
+			this.ExteriorDeckY = data.ExteriorDeckY;
+			this.ExteriorDeckWidth = data.ExteriorDeckWidth;
+			this.ExteriorCrewNPCs = data.ExteriorCrewNPCs.ToList();
 
 			Main.dungeonX = data.DungeonX;
 			Main.dungeonY = data.DungeonY;
@@ -173,9 +126,10 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			this.InteriorTileTop = intTop;
 
 			this.ExteriorShipView = new Vector2( extLeft * 16, extTop * 16 );
+			this.ExteriorShipView.X += 28f * 16f;
 			this.ExteriorShipView.Y -= 12f * 16f;
 			this.InteriorShipView = new Vector2( intLeft * 16, intTop * 16 );
-			this.InteriorShipView.X += 16f * 16f;
+			this.InteriorShipView.X += 40f * 16f;
 			this.InteriorShipView.Y += 12f * 16f;
 		}
 
@@ -213,7 +167,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			
 			this.ExteriorDeckWidth = TileFinderHelpers.GetFloorWidth(
 				nonFloorPattern: nonDeckPattern,
-				tileX: extLeft,
+				tileX: extLeft + (shipExterior.Bounds.Width / 2),
 				tileY: extTop,
 				maxFallRange: 50,
 				floorX: out this.ExteriorDeckX,
@@ -222,12 +176,19 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 
 			//
 
-			int x = this.ExteriorDeckX + (this.ExteriorDeckWidth / 2);
-			int y = this.ExteriorDeckY - 3;
+			int x = this.ExteriorDeckX;
+			int y = this.ExteriorDeckY - 4;
 
-			int npcWho = NPC.NewNPC( x, y, NPCID.Guide );
-			if( Main.netMode != NetmodeID.SinglePlayer ) {
-				NetMessage.SendData( MessageID.SyncNPC, -1, -1, null, npcWho );
+			for( int i=0; i<4; i++ ) {
+				x += this.ExteriorDeckWidth / 5;
+				int npcWho = NPC.NewNPC( x * 16, y * 16, NPCID.Guide );
+				Main.npc[npcWho].color = new Color( Main.rand.Next(255), Main.rand.Next(255), Main.rand.Next(255) );
+
+				this.ExteriorCrewNPCs.Add( npcWho );
+
+				if( Main.netMode != NetmodeID.SinglePlayer ) {
+					NetMessage.SendData( MessageID.SyncNPC, -1, -1, null, npcWho );
+				}
 			}
 		}
 	}
