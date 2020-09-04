@@ -15,7 +15,11 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			for( int i=0; i<4; i++ ) {
 				x += this.ExteriorDeckWidth / 5;
 				int npcWho = NPC.NewNPC( x * 16, y * 16, NPCID.Guide );
-				Main.npc[npcWho].color = new Color( Main.rand.Next(255), Main.rand.Next(255), Main.rand.Next(255) );
+				Main.npc[ npcWho ].color = new Color(
+					Main.rand.Next(192, 255),
+					Main.rand.Next(192, 255),
+					Main.rand.Next(192, 255)
+				);
 
 				this.ExteriorCrewNPCs.Add( npcWho );
 				if( i >= 3 ) {

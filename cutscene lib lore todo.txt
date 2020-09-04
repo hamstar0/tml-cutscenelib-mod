@@ -15,12 +15,12 @@ v1
 		-	...
 		-	Spawn pirates
 		-	Kill guides with cannon fire
+
 		-	Apply behaviors to guides
 			-	Give guides only mild color tones
 			-	Ensure guides are walking on deck (not crates)
 			-	Have one guide view dungeon with binoculars
 				-	Draw binocs
-
 				-	Make npc hold still (PostAI velocity = 0? aiStyle = 0? PreAI = false?)
 		-	Spawn guides on ship dec
 		-	@Plan

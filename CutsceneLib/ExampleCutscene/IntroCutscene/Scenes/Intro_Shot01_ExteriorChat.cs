@@ -74,7 +74,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 
 		private void DrawInterface01_ExteriorChat() {
 			NPC captain = Main.npc[ this.Set.ExteriorCrewCaptainNPC ];
-			var binocPos = captain.Center + new Vector2( 8, -16 );
+			var binocPos = captain.Center + new Vector2( 8, -12 );
 			binocPos = UIZoomHelpers.ConvertToScreenPosition( binocPos, null, null );
 
 			Main.spriteBatch.Draw(
@@ -82,7 +82,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 				position: binocPos,
 				sourceRectangle: null,
 				color: Color.White,
-				rotation: MathHelper.ToRadians(90),
+				rotation: MathHelper.ToRadians(270),
 				origin: default(Vector2),
 				scale: 1f,
 				effects: SpriteEffects.None,

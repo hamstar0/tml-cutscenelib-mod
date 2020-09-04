@@ -128,7 +128,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			this.InteriorTileTop = intTileTop;
 
 			this.ExteriorShipView = new Vector2( extTileLeft * 16, extTileTop * 16 );
-			this.ExteriorShipView.X += 48f * 16f;
+			this.ExteriorShipView.X += 64f * 16f;
 			this.ExteriorShipView.Y += 8f * 16f;
 
 			this.InteriorShipView = new Vector2( intTileLeft * 16, intTileTop * 16 );

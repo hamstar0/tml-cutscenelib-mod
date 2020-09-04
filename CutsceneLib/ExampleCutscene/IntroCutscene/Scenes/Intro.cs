@@ -42,7 +42,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 			this.BeginShot00_Title( parent );
 			
 			this.GetCam00_Title( cams, this.BeginShot01_ExteriorChat );
-			this.GetCam01_ExteriorChat( cams, null, exteriorShipView );
+			this.GetCam01_ExteriorChat( cams, this.BeginShot02_Dungeon, exteriorShipView );
 			this.GetCam02_Dungeon( cams, this.BeginShot03_ExteriorAttack, isShipOnLeft );
 			this.GetCam03_ExteriorAttack( cams, this.BeginShot04_InteriorChat, exteriorShipView );
 			this.GetCam04_InteriorChat( cams, null, interiorShipView );
