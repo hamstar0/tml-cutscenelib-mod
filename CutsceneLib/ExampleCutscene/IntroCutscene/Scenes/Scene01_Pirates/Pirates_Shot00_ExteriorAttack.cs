@@ -8,23 +8,23 @@ using CutsceneLib.Definitions;
 using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 
-namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
-	partial class IntroCutsceneScene_00 : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
-		private void BeginShot03_ExteriorAttack() {
+namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
+	partial class Intro01_PiratesScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
+		private void BeginShot00_ExteriorAttack() {
 
 		}
 
 
 		////////////////
 
-		private void GetCam03_ExteriorAttack(
+		private void GetCam00_ExteriorAttack(
 					IList<CameraMover> cams,
 					Action onCamStop,
 					Vector2 exteriorShipView ) {
 			int next = cams.Count;
 
 			var cam = new CameraMover(
-				name: "CutsceneLibIntro_" + cams.Count,
+				name: "CutsceneLib_Intro_Pirates_" + cams.Count,
 				moveXFrom: (int)exteriorShipView.X,
 				moveYFrom: (int)exteriorShipView.Y,
 				moveXTo: (int)exteriorShipView.X,

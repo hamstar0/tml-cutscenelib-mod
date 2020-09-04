@@ -15,6 +15,14 @@ namespace CutsceneLib.Logic {
 		internal void Update_Internal() {
 			// Cleanup unclaimed cutscenes
 			foreach( int plrWho in this._CutscenePerPlayer.Keys.ToArray() ) {
+				if( Main.netMode != NetmodeID.Server && CutsceneLibConfig.Instance.DebugModeInfo ) {
+					Cutscene cutscene = this._CutscenePerPlayer[plrWho];
+					DebugHelpers.Print(
+						"cutscene_"+plrWho,
+						cutscene.UniqueId.ToString()+", "+cutscene?.CurrentScene.UniqueId.ToString()
+					);
+				}
+
 				if( Main.player[plrWho]?.active != true ) {
 					this.EndCutscene( this._CutscenePerPlayer[plrWho].UniqueId, plrWho, false );
 				}

@@ -5,8 +5,9 @@ using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Tiles;
 using CutsceneLib.Definitions;
 using CutsceneLib.Net;
-using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes;
 using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
+using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting;
+using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates;
 
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene {
@@ -14,6 +15,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		protected override SceneBase CreateScene( SceneID sceneId ) {
 			if( sceneId.Equals(this.FirstSceneId) ) {
 				return this.CreateIntroScene();
+			} else if( sceneId.Equals(this.SecondSceneId) ) {
+				return Intro01_PiratesScene.Create( this );
 			}
 
 			return null;
@@ -24,6 +27,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		protected override SceneBase CreateSceneFromNetwork( SceneID sceneId, CutsceneNetStart data ) {
 			if( sceneId.Equals(this.FirstSceneId) ) {
 				return this.CreateIntroSceneFromNetwork( data );
+			} else if( sceneId.Equals( this.SecondSceneId ) ) {
+				return Intro01_PiratesScene.Create( this );
 			}
 
 			return null;
@@ -35,7 +40,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		private SceneBase CreateIntroScene() {
 			var set = IntroMovieSet.Create( ref this._ShipExterior, ref this._ShipInterior, out _, out string __ );
 			if( set != null ) {
-				return new IntroCutsceneScene_00( set );
+				return new Intro00_SettingScene( set );
 			}
 
 			return null;
@@ -51,12 +56,12 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 				out string result
 			);
 			if( set != null ) {
-				return new IntroCutsceneScene_00( set );
+				return new Intro00_SettingScene( set );
 			}
 
 			if( result != "Found null tile." ) {
 				set = IntroMovieSet.Create( (IntroCutsceneNetData)data );
-				return new IntroCutsceneScene_00( set );
+				return new Intro00_SettingScene( set );
 			}
 
 			// Request and await tile chunks from server

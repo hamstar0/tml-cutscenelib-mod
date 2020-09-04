@@ -10,7 +10,7 @@ namespace CutsceneLib.Definitions {
 				where T : Cutscene
 				where U : MovieSet
 				where V : CutsceneNetStart {
-		protected U Set;
+		public U Set { get; protected set; }
 
 
 

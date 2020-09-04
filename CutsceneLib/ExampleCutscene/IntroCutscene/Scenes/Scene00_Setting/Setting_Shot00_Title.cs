@@ -8,8 +8,8 @@ using CutsceneLib.Definitions;
 using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 
-namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
-	partial class IntroCutsceneScene_00 : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
+namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
+	partial class Intro00_SettingScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
 		private void BeginShot00_Title( IntroCutscene cutscene ) {
 			//cutscene.AddActor( NPCID.Guide, )
 		}
@@ -24,7 +24,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 			int worldY = 40 * 16;
 
 			var cam = new CameraMover(
-				name: "CutsceneLibIntro_"+cams.Count,
+				name: "CutsceneLib_Intro_Setting_" + cams.Count,
 				moveXFrom: worldX,
 				moveYFrom: worldY,
 				moveXTo: worldX,

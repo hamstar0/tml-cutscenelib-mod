@@ -42,15 +42,7 @@ namespace CutsceneLib.Definitions {
 			SceneID nextUid = this.CurrentScene.GetNextSceneId();
 
 			if( nextUid != null ) {
-				this.CurrentScene = this.CreateScene( nextUid );
-
-				if( sync ) {
-					if( Main.netMode == NetmodeID.MultiplayerClient ) {
-						CutsceneNetStart.Broadcast( cutscene: this );
-					} else if( Main.netMode == NetmodeID.Server ) {
-						CutsceneNetStart.SendToClients( cutscene: this, -1 );
-					}
-				}
+				this.SetCurrentScene( nextUid, sync );
 			} else {
 				CutsceneManager.Instance.EndCutscene( this.UniqueId, this.PlaysForWhom, sync );
 			}

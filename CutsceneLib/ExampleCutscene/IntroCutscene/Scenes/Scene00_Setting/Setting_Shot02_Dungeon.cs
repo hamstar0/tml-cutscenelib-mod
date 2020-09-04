@@ -9,8 +9,8 @@ using CutsceneLib.Definitions;
 using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 
-namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
-	partial class IntroCutsceneScene_00 : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
+namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
+	partial class Intro00_SettingScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
 		private void BeginShot02_Dungeon() { }
 
 
@@ -26,7 +26,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 			int next = cams.Count;
 			
 			var cam = new CameraMover(
-				name: "CutsceneLibIntro_" + cams.Count,
+				name: "CutsceneLib_Intro_Setting_" + cams.Count,
 				moveXFrom: (int)dungeonView.X,
 				moveYFrom: (int)dungeonView.Y,
 				moveXTo: (int)dungeonView.X,
@@ -36,7 +36,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 				froDuration: 0,
 				onStop: () => {
 					onCamStop?.Invoke();
-					CameraMover.Current = cams[next + 1];
+					//CameraMover.Current = cams[next + 1];
 				}
 			);
 

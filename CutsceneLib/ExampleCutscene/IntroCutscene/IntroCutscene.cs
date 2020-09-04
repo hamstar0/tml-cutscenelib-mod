@@ -5,7 +5,8 @@ using HamstarHelpers.Classes.TileStructure;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Helpers.Info;
 using CutsceneLib.Definitions;
-using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes;
+using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting;
+using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates;
 
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene {
@@ -24,10 +25,15 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 
 		public override SceneID FirstSceneId { get; } = new SceneID(
 			mod: CutsceneLibMod.Instance,
-			sceneType: typeof(IntroCutsceneScene_00)
+			sceneType: typeof(Intro00_SettingScene)
 		);
 
-		////
+		public SceneID SecondSceneId { get; } = new SceneID(
+			mod: CutsceneLibMod.Instance,
+			sceneType: typeof(Intro01_PiratesScene)
+		);
+
+		////////////////
 
 		public override bool CanAutoplay => false;
 

@@ -54,11 +54,7 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
-		internal SceneBase Create( Player playsFor, params object[] args ) {
-			var newArgs = new object[ args.Length + 1 ];
-			newArgs[0] = playsFor;
-			args.CopyTo( newArgs, 1 );
-
+		/*internal SceneBase Create( params object[] args ) {
 			Mod mod = ModLoader.GetMod( this.ModName );
 
 			ObjectHandle objHand = Activator.CreateInstance(
@@ -67,11 +63,11 @@ namespace CutsceneLib.Definitions {
 				ignoreCase: false,
 				bindingAttr: BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
 				binder: null,
-				args: newArgs,
+				args: args,
 				culture: null,
 				activationAttributes: new object[] { }
 			);
 			return objHand.Unwrap() as SceneBase;
-		}
+		}*/
 	}
 }

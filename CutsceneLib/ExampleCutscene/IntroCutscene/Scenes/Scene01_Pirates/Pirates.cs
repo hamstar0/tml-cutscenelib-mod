@@ -7,20 +7,34 @@ using HamstarHelpers.Classes.CameraAnimation;
 using HamstarHelpers.Helpers.Debug;
 using CutsceneLib.Definitions;
 using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
+using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting;
 
 
-namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
-	partial class IntroCutsceneScene_00 : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
-		public override SceneID UniqueId { get; } = new SceneID(
-			mod: CutsceneLibMod.Instance,
-			sceneType: typeof(IntroCutsceneScene_00)
-		);
+namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
+	partial class Intro01_PiratesScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
+		public static Intro01_PiratesScene Create( IntroCutscene cutscene ) {
+			var currScene = cutscene.CurrentScene as Intro00_SettingScene;
+			if( currScene == null ) {
+				return null;
+			}
+
+			return new Intro01_PiratesScene( currScene.Set );
+		}
 
 
 
 		////////////////
 
-		public IntroCutsceneScene_00( IntroMovieSet set )  : base( false, set ) { }
+		public override SceneID UniqueId { get; } = new SceneID(
+			mod: CutsceneLibMod.Instance,
+			sceneType: typeof(Intro01_PiratesScene)
+		);
+
+
+
+		////////////////
+		
+		public Intro01_PiratesScene( IntroMovieSet set )  : base( false, set ) { }
 
 
 		////////////////
@@ -37,15 +51,10 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 			Vector2 exteriorShipView = this.Set.ExteriorShipView;
 			Vector2 interiorShipView = this.Set.InteriorShipView;
 
-			bool isShipOnLeft = (int)exteriorShipView.X < ((16 * Main.maxTilesX) / 2);
+			this.BeginShot00_ExteriorAttack();
 
-			this.BeginShot00_Title( parent );
-			
-			this.GetCam00_Title( cams, this.BeginShot01_ExteriorChat );
-			this.GetCam01_ExteriorChat( cams, this.BeginShot02_Dungeon, exteriorShipView );
-			this.GetCam02_Dungeon( cams, this.BeginShot03_ExteriorAttack, isShipOnLeft );
-			this.GetCam03_ExteriorAttack( cams, this.BeginShot04_InteriorChat, exteriorShipView );
-			this.GetCam04_InteriorChat( cams, null, interiorShipView );
+			this.GetCam00_ExteriorAttack( cams, this.BeginShot01_InteriorChat, exteriorShipView );
+			this.GetCam01_InteriorChat( cams, null, interiorShipView );
 
 			CameraMover.Current = cams[0];
 		}
@@ -56,7 +65,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 		protected override bool Update( IntroCutscene parent ) {
 			if( Main.netMode != NetmodeID.Server ) {
 				var cam = CameraMover.Current;
-				if( cam == null || !cam.Name.StartsWith( "CutsceneLibIntro" ) || !cam.IsAnimating() ) {
+				if( cam == null || !cam.Name.StartsWith( "CutsceneLib_Intro_Pirates_" ) || !cam.IsAnimating() ) {
 					return true;
 				}
 			}
@@ -70,10 +79,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 			var cam = CameraMover.Current;
 
 			switch( cam.Name ) {
-			case "CutsceneLibIntro_1":
-				return this.UpdateNPC01_ExteriorChat( npc );
-			case "CutsceneLibIntro_2":
-				return this.UpdateNPC02_DungeonView( npc );
+			case "CutsceneLib_Intro_Pirates_0":
+				break;
 			}
 			return true;
 		}
@@ -82,8 +89,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 			var cam = CameraMover.Current;
 
 			switch( cam.Name ) {
-			case "CutsceneLibIntro_1":
-				this.UpdateNPCFrame01_ExteriorChat( npc, frameHeight );
+			case "CutsceneLib_Intro_Pirates_0":
 				break;
 			}
 		}
@@ -93,11 +99,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 
 		public override void DrawInterface() {
 			switch( CameraMover.Current.Name ) {
-			case "CutsceneLibIntro_0":
-				this.DrawInterface00_Title();
-				break;
-			case "CutsceneLibIntro_1":
-				this.DrawInterface01_ExteriorChat();
+			case "CutsceneLib_Intro_Pirates_0":
 				break;
 			}
 		}

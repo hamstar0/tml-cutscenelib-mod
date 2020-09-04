@@ -8,31 +8,31 @@ using CutsceneLib.Definitions;
 using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 
-namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
-	partial class IntroCutsceneScene_00 : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
-		private void BeginShot04_InteriorChat() {
+namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
+	partial class Intro01_PiratesScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
+		private void BeginShot01_InteriorChat() {
 
 		}
 
 
 		////////////////
 
-		private void GetCam04_InteriorChat( IList<CameraMover> cams, Action onCamStop, Vector2 interiorShipView ) {
+		private void GetCam01_InteriorChat( IList<CameraMover> cams, Action onCamStop, Vector2 interiorShipView ) {
 			int next = cams.Count;
 
 			var cam = new CameraMover(
-				name: "CutsceneLibIntro_" + cams.Count,
+				name: "CutsceneLib_Intro_Pirates_" + cams.Count,
 				moveXFrom: (int)interiorShipView.X,
 				moveYFrom: (int)interiorShipView.Y,
 				moveXTo: (int)interiorShipView.X,
 				moveYTo: (int)interiorShipView.Y,
 				toDuration: 0,
 				lingerDuration: 60 * 5,
-				froDuration: 0
-				/*onStop: () => {
+				froDuration: 0,
+				onStop: () => {
 					onCamStop?.Invoke();
-					CameraMover.Current = cams[next + 1];
-				}*/
+					//CameraMover.Current = cams[next + 1];
+				}
 			);
 
 			cams.Add( cam );
