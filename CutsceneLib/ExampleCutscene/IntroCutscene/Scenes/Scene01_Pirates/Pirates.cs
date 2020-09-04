@@ -51,7 +51,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			Vector2 exteriorShipView = this.Set.ExteriorShipView;
 			Vector2 interiorShipView = this.Set.InteriorShipView;
 
-			this.BeginShot00_ExteriorAttack();
+			this.BeginShot00_ExteriorAttack( parent );
 
 			this.GetCam00_ExteriorAttack( cams, this.BeginShot01_InteriorChat, exteriorShipView );
 			this.GetCam01_InteriorChat( cams, null, interiorShipView );

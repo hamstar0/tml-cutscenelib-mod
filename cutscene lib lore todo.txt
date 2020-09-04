@@ -5,6 +5,8 @@ Future
 
 v1
 -	@MH: Set PingProtocol to be "verbose" (attribute?)
+-	F&T
+	-	Prevent other guides from wandering upon captain's position
 -	Implement camera sine smoothing
 -	Finish implementing cutscene mechanics
 	-	Cleanup loaded set after all scenes traversed
@@ -14,9 +16,9 @@ v1
 	-	Implement actors
 		-	Spawn and reveal pirates
 		-	Kill guides with cannon fire
-			-	Spawn low velocity cannon balls aimed at crew
-			-	Implement next scene (syncs server for beginning action)
+			-	Spawn cannon balls aimed at crew
 
+			-	Implement next scene (syncs server for beginning action)
 		-	Apply behaviors to guides
 			-	Give guides only mild color tones
 			-	Ensure guides are walking on deck (not crates)

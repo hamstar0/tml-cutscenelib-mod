@@ -176,8 +176,6 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 				floorX: out this.ExteriorDeckX,
 				floorY: out this.ExteriorDeckY
 			);
-
-			this.SpawnActors();
 		}
 	}
 }
