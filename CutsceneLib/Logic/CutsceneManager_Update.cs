@@ -82,10 +82,23 @@ namespace CutsceneLib.Logic {
 
 		////////////////
 
-		internal void Update_NPC_Internal( NPC npc ) {
+		internal bool Update_NPC_Internal( NPC npc ) {
+			IEnumerable<Cutscene> cutscenes = this.GetActiveCutscenes_World();
+			bool allowAI = true;
+
+			foreach( Cutscene cutscene in cutscenes ) {
+				if( !cutscene.UpdateNPC_Internal(npc) ) {
+					allowAI = false;
+				}
+			}
+
+			return allowAI;
+		}
+
+		internal void Update_NPCFrame_Internal( NPC npc, int frameHeight ) {
 			IEnumerable<Cutscene> cutscenes = this.GetActiveCutscenes_World();
 			foreach( Cutscene cutscene in cutscenes ) {
-				cutscene.UpdateNPC_Internal( npc );
+				cutscene.Update_NPCFrame_Internal( npc, frameHeight );
 			}
 		}
 	}

@@ -41,7 +41,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 
 			var dungeonView = new Vector2( Main.dungeonX * 16, Main.dungeonY * 16 );
 			dungeonView.X += isShipOnLeft ? (-32 * 16) : (32 * 16);
-			dungeonView.Y += -32 * 16;
+			//dungeonView.Y += -32 * 16;
 
 			this.BeginShot00_Title( parent );
 			
@@ -58,13 +58,11 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 		////////////////
 
 		protected override bool Update( IntroCutscene parent ) {
-			if( Main.netMode == NetmodeID.Server ) {
-				return false;
-			}
-
-			var cam = CameraMover.Current;
-			if( cam == null || !cam.Name.StartsWith("CutsceneLibIntro") || !cam.IsAnimating() ) {
-				return true;
+			if( Main.netMode != NetmodeID.Server ) {
+				var cam = CameraMover.Current;
+				if( cam == null || !cam.Name.StartsWith( "CutsceneLibIntro" ) || !cam.IsAnimating() ) {
+					return true;
+				}
 			}
 
 			return false;
@@ -72,12 +70,25 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 
 		////
 
-		public override void UpdateNPC( NPC npc ) {
-			if( npc.type == NPCID.OldMan ) {
-				npc.ai[0] = 0f;
-				npc.ai[1] = 0f;
-				npc.ai[2] = 0f;
-				npc.ai[3] = 0f;
+		public override bool UpdateNPC( NPC npc ) {
+			var cam = CameraMover.Current;
+
+			switch( cam.Name ) {
+			case "CutsceneLibIntro_1":
+				return this.UpdateNPC01_ExteriorChat( npc );
+			case "CutsceneLibIntro_2":
+				return this.UpdateNPC02_DungeonView( npc );
+			}
+			return true;
+		}
+
+		public override void UpdateNPCFrame( NPC npc, int frameHeight ) {
+			var cam = CameraMover.Current;
+
+			switch( cam.Name ) {
+			case "CutsceneLibIntro_1":
+				this.UpdateNPCFrame01_ExteriorChat( npc, frameHeight );
+				break;
 			}
 		}
 
@@ -86,8 +97,11 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 
 		public override void DrawInterface() {
 			switch( CameraMover.Current.Name ) {
-			case "CutsceneLibIntro_Title":
+			case "CutsceneLibIntro_0":
 				this.DrawInterface00_Title();
+				break;
+			case "CutsceneLibIntro_1":
+				this.DrawInterface01_ExteriorChat();
 				break;
 			}
 		}

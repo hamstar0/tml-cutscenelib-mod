@@ -1,5 +1,6 @@
 ﻿using System;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using CutsceneLib.Logic;
 using CutsceneLib.Definitions;
@@ -26,7 +27,7 @@ namespace CutsceneLib {
 		}*/
 
 
-		////
+		////////////////
 
 		public override bool PreAI( NPC npc ) {
 			var cutMngr = CutsceneManager.Instance;
@@ -40,9 +41,20 @@ namespace CutsceneLib {
 				npc.life = 0;
 			}
 
-			cutMngr.Update_NPC_Internal( npc );
-			
-			return base.PreAI( npc );
+			return cutMngr.Update_NPC_Internal( npc );
+		}
+
+
+		////////////////
+
+		public override void FindFrame( NPC npc, int frameHeight ) {
+			var cutMngr = CutsceneManager.Instance;
+			Cutscene nowCutscene = cutMngr?.GetCurrentCutscene_Player( Main.LocalPlayer );
+			if( nowCutscene == null ) {
+				return;
+			}
+
+			cutMngr.Update_NPCFrame_Internal( npc, frameHeight );
 		}
 	}
 }

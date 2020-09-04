@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using HamstarHelpers.Classes.CameraAnimation;
 using HamstarHelpers.Helpers.Debug;
 using CutsceneLib.Definitions;
@@ -13,7 +14,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 		private void GetCam02_Dungeon( IList<CameraMover> cams, Action onCamStop, Vector2 dungeonView ) {
 			int next = cams.Count;
 			var cam = new CameraMover(
-				name: "CutsceneLibIntro",
+				name: "CutsceneLibIntro_" + cams.Count,
 				moveXFrom: (int)dungeonView.X,
 				moveYFrom: (int)dungeonView.Y,
 				moveXTo: (int)dungeonView.X,
@@ -28,6 +29,21 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 			);
 
 			cams.Add( cam );
+		}
+
+
+		////////////////
+
+		private bool UpdateNPC02_DungeonView( NPC npc ) {
+			if( npc.type == NPCID.OldMan ) {
+				npc.ai[0] = 0f;
+				npc.ai[1] = 0f;
+				npc.ai[2] = 0f;
+				npc.ai[3] = 0f;
+				npc.velocity = new Vector2( 0.5f, 0f );
+				return false;
+			}
+			return true;
 		}
 	}
 }

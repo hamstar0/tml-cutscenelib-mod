@@ -23,7 +23,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 					Vector2 exteriorShipView ) {
 			int next = cams.Count;
 			var cam = new CameraMover(
-				name: "CutsceneLibIntro",
+				name: "CutsceneLibIntro_" + cams.Count,
 				moveXFrom: (int)exteriorShipView.X,
 				moveYFrom: (int)exteriorShipView.Y,
 				moveXTo: (int)exteriorShipView.X,

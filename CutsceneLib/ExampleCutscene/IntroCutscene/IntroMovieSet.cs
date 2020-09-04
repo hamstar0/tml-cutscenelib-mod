@@ -98,6 +98,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		public int ExteriorDeckY;
 
 		public IList<int> ExteriorCrewNPCs = new List<int>();
+		public int ExteriorCrewCaptainNPC;
 
 		public Vector2 ExteriorShipView;
 		public Vector2 InteriorShipView;
@@ -114,6 +115,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			this.ExteriorDeckY = data.ExteriorDeckY;
 			this.ExteriorDeckWidth = data.ExteriorDeckWidth;
 			this.ExteriorCrewNPCs = data.ExteriorCrewNPCs.ToList();
+			this.ExteriorCrewCaptainNPC = data.ExteriorCrewNPCs.Last();
 
 			Main.dungeonX = data.DungeonX;
 			Main.dungeonY = data.DungeonY;
@@ -126,11 +128,12 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			this.InteriorTileTop = intTop;
 
 			this.ExteriorShipView = new Vector2( extLeft * 16, extTop * 16 );
-			this.ExteriorShipView.X += 28f * 16f;
-			this.ExteriorShipView.Y -= 12f * 16f;
+			//this.ExteriorShipView.X += 28f * 16f;
+			//this.ExteriorShipView.Y -= 12f * 16f;
 			this.InteriorShipView = new Vector2( intLeft * 16, intTop * 16 );
-			this.InteriorShipView.X += 40f * 16f;
-			this.InteriorShipView.Y += 12f * 16f;
+			//this.InteriorShipView.X += 40f * 16f;
+			this.InteriorShipView.X += 20f * 16f;
+			this.InteriorShipView.Y += 24f * 16f;
 		}
 
 		private IntroMovieSet(
@@ -174,22 +177,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 				floorY: out this.ExteriorDeckY
 			);
 
-			//
-
-			int x = this.ExteriorDeckX;
-			int y = this.ExteriorDeckY - 4;
-
-			for( int i=0; i<4; i++ ) {
-				x += this.ExteriorDeckWidth / 5;
-				int npcWho = NPC.NewNPC( x * 16, y * 16, NPCID.Guide );
-				Main.npc[npcWho].color = new Color( Main.rand.Next(255), Main.rand.Next(255), Main.rand.Next(255) );
-
-				this.ExteriorCrewNPCs.Add( npcWho );
-
-				if( Main.netMode != NetmodeID.SinglePlayer ) {
-					NetMessage.SendData( MessageID.SyncNPC, -1, -1, null, npcWho );
-				}
-			}
+			this.SpawnActors();
 		}
 	}
 }

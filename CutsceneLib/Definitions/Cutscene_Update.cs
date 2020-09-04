@@ -18,8 +18,12 @@ namespace CutsceneLib.Definitions {
 
 		////
 
-		internal void UpdateNPC_Internal( NPC npc ) {
-			this.CurrentScene?.UpdateNPC( npc );
+		internal bool UpdateNPC_Internal( NPC npc ) {
+			return this.CurrentScene?.UpdateNPC( npc ) ?? true;
+		}
+
+		internal void Update_NPCFrame_Internal( NPC npc, int frameHeight ) {
+			this.CurrentScene?.UpdateNPCFrame( npc, frameHeight );
 		}
 	}
 }

@@ -25,7 +25,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 		private void GetCam00_Title( IList<CameraMover> cams, Action onCamStop ) {
 			int next = cams.Count;
 			var cam = new CameraMover(
-				name: "CutsceneLibIntro_Title",
+				name: "CutsceneLibIntro_"+cams.Count,
 				moveXFrom: (Main.maxTilesX - 40) - (Main.screenWidth / 16),
 				moveYFrom: 40,
 				moveXTo: (Main.maxTilesX - 40) - (Main.screenWidth / 16),

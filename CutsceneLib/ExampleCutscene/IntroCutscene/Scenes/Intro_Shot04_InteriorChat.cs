@@ -20,7 +20,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 		private void GetCam04_InteriorChat( IList<CameraMover> cams, Action onCamStop, Vector2 interiorShipView ) {
 			int next = cams.Count;
 			var cam = new CameraMover(
-				name: "CutsceneLibIntro",
+				name: "CutsceneLibIntro_" + cams.Count,
 				moveXFrom: (int)interiorShipView.X,
 				moveYFrom: (int)interiorShipView.Y,
 				moveXTo: (int)interiorShipView.X,

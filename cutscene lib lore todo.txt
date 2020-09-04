@@ -5,7 +5,7 @@ Future
 
 v1
 -	@MH: Set PingProtocol to be "verbose" (attribute?)
--	Add debug info
+-	Implement camera sine smoothing
 -	Finish implementing cutscene mechanics
 	-	Cleanup loaded set after all scenes traversed
 	-	Implement UI for dialogue choices responses
@@ -16,9 +16,13 @@ v1
 		-	Spawn pirates
 		-	Kill guides with cannon fire
 		-	Apply behaviors to guides
-		-	Spawn guides on ship deck
+			-	Give guides only mild color tones
+			-	Ensure guides are walking on deck (not crates)
+			-	Have one guide view dungeon with binoculars
+				-	Draw binocs
 
-
+				-	Make npc hold still (PostAI velocity = 0? aiStyle = 0? PreAI = false?)
+		-	Spawn guides on ship dec
 		-	@Plan
 			1	Populate ship deck with guides
 				-	Give guides different colors (and sizes?)

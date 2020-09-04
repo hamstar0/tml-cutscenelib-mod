@@ -83,7 +83,11 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
-		public virtual void UpdateNPC( NPC npc ) { }
+		public virtual bool UpdateNPC( NPC npc ) {
+			return true;
+		}
+
+		public virtual void UpdateNPCFrame( NPC npc, int frameHeight ) { }
 
 
 		////////////////
