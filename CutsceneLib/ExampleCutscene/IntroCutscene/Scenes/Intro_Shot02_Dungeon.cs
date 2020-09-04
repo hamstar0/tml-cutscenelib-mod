@@ -11,8 +11,15 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 	partial class IntroCutsceneScene_00 : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
-		private void GetCam02_Dungeon( IList<CameraMover> cams, Action onCamStop, Vector2 dungeonView ) {
+		private void GetCam02_Dungeon( IList<CameraMover> cams, Action onCamStop, bool isShipOnLeft ) {
+			var dungeonView = new Vector2( Main.dungeonX * 16, Main.dungeonY * 16 );
+			dungeonView.X += isShipOnLeft
+				? 0
+				: (32 * 16);
+			//dungeonView.Y += -32 * 16;
+
 			int next = cams.Count;
+			
 			var cam = new CameraMover(
 				name: "CutsceneLibIntro_" + cams.Count,
 				moveXFrom: (int)dungeonView.X,

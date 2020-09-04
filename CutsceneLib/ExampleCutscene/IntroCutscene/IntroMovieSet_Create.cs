@@ -29,17 +29,17 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 				//	+", exterior: "+shipExterior.Bounds.ToString()+" ("+shipExterior.TileCount+")");
 			}
 
-			int extLeft, extTop;
-			int intLeft, intTop;
+			int extTileLeft, extTileTop;
+			int intTileLeft, intTileTop;
 			bool isFlipped;
 			bool isOcean;
 
-			isOcean = IntroMovieSet.GetSceneCoordinates( shipExterior.Bounds.Width, out extLeft, out extTop, out isFlipped, out result );
-			isOcean = IntroMovieSet.GetSceneCoordinates( shipInterior.Bounds.Width, out intLeft, out intTop, out isFlipped, out result );
+			isOcean = IntroMovieSet.GetSceneCoordinates( shipExterior.Bounds.Width, out extTileLeft, out extTileTop, out isFlipped, out result );
+			isOcean = IntroMovieSet.GetSceneCoordinates( shipInterior.Bounds.Width, out intTileLeft, out intTileTop, out isFlipped, out result );
 
 			if( !isOcean ) {
 				chunkRange = new Rectangle(
-					intLeft,
+					intTileLeft,
 					41,
 					Math.Max( shipExterior.Bounds.Width, shipInterior.Bounds.Width ),
 					shipExterior.Bounds.Height + shipInterior.Bounds.Height + 20
@@ -50,10 +50,10 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			//extLeft += shipExterior.Bounds.Width / 2;
 			//intLeft += shipInterior.Bounds.Width / 2;
 			//extTop -= 8;
-			intTop = Math.Max( intTop - 160, 41 );
+			intTileTop = Math.Max( intTileTop - 160, 41 );
 
 			chunkRange = default( Rectangle );
-			return new IntroMovieSet( shipExterior, shipInterior, extLeft, extTop, intLeft, intTop, isFlipped );
+			return new IntroMovieSet( shipExterior, shipInterior, extTileLeft, extTileTop, intTileLeft, intTileTop, isFlipped );
 		}
 
 

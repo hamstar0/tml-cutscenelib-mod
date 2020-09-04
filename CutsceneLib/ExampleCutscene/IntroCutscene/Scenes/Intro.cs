@@ -39,15 +39,11 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 
 			bool isShipOnLeft = (int)exteriorShipView.X < ((16 * Main.maxTilesX) / 2);
 
-			var dungeonView = new Vector2( Main.dungeonX * 16, Main.dungeonY * 16 );
-			dungeonView.X += isShipOnLeft ? (-32 * 16) : (32 * 16);
-			//dungeonView.Y += -32 * 16;
-
 			this.BeginShot00_Title( parent );
 			
 			this.GetCam00_Title( cams, this.BeginShot01_ExteriorChat );
 			this.GetCam01_ExteriorChat( cams, null, exteriorShipView );
-			this.GetCam02_Dungeon( cams, this.BeginShot03_ExteriorAttack, dungeonView );
+			this.GetCam02_Dungeon( cams, this.BeginShot03_ExteriorAttack, isShipOnLeft );
 			this.GetCam03_ExteriorAttack( cams, this.BeginShot04_InteriorChat, exteriorShipView );
 			this.GetCam04_InteriorChat( cams, null, interiorShipView );
 

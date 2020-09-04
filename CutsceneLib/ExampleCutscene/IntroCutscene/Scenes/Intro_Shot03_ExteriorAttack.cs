@@ -22,6 +22,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes {
 					Action onCamStop,
 					Vector2 exteriorShipView ) {
 			int next = cams.Count;
+
 			var cam = new CameraMover(
 				name: "CutsceneLibIntro_" + cams.Count,
 				moveXFrom: (int)exteriorShipView.X,

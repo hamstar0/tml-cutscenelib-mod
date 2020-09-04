@@ -16,9 +16,9 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 	partial class IntroMovieSet : MovieSet {
 		public static bool GetSceneCoordinates(
-					int width,
-					out int left,
-					out int top,
+					int tileWidth,
+					out int leftTile,
+					out int topTile,
 					out bool isFlipped,
 					out string result ) {
 			bool canContinueScan( int x, int y ) {
@@ -52,11 +52,11 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 				left = 41;
 			}*/
 
-			for( left = top = 41; canContinueScan(left, top); top++ ) { }
+			for( leftTile = topTile = 41; canContinueScan(leftTile, topTile); topTile++ ) { }
 
-			Tile tile = Main.tile[left, top];
-			int oceanTop = top;
-			top -= 18;
+			Tile tile = Main.tile[ leftTile, topTile ];
+			int oceanTop = topTile;
+			topTile -= 18;
 
 			bool isOcean = tile != null								// tile exists
 				&& tile.liquid != 0									// tile has liquid
@@ -121,41 +121,41 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			Main.dungeonY = data.DungeonY;
 		}
 
-		private IntroMovieSet( int extLeft, int extTop, int intLeft, int intTop ) {
-			this.ExteriorTileLeft = extLeft;
-			this.ExteriorTileTop = extTop;
-			this.InteriorTileLeft = intLeft;
-			this.InteriorTileTop = intTop;
+		private IntroMovieSet( int extTileLeft, int extTileTop, int intTileLeft, int intTileTop ) {
+			this.ExteriorTileLeft = extTileLeft;
+			this.ExteriorTileTop = extTileTop;
+			this.InteriorTileLeft = intTileLeft;
+			this.InteriorTileTop = intTileTop;
 
-			this.ExteriorShipView = new Vector2( extLeft * 16, extTop * 16 );
-			//this.ExteriorShipView.X += 28f * 16f;
-			//this.ExteriorShipView.Y -= 12f * 16f;
-			this.InteriorShipView = new Vector2( intLeft * 16, intTop * 16 );
-			//this.InteriorShipView.X += 40f * 16f;
-			this.InteriorShipView.X += 20f * 16f;
-			this.InteriorShipView.Y += 24f * 16f;
+			this.ExteriorShipView = new Vector2( extTileLeft * 16, extTileTop * 16 );
+			this.ExteriorShipView.X += 48f * 16f;
+			this.ExteriorShipView.Y += 8f * 16f;
+
+			this.InteriorShipView = new Vector2( intTileLeft * 16, intTileTop * 16 );
+			this.InteriorShipView.X += 64f * 16f;
+			this.InteriorShipView.Y += 36f * 16f;
 		}
 
 		private IntroMovieSet(
 					TileStructure shipExterior,
 					TileStructure shipInterior,
-					int extLeft,
-					int extTop,
-					int intLeft,
-					int intTop,
+					int extTileLeft,
+					int extTileTop,
+					int intTileLeft,
+					int intTileTop,
 					bool isFlipped
-				) : this( extLeft, extTop, intLeft, intTop ) {
+				) : this( extTileLeft, extTileTop, intTileLeft, intTileTop ) {
 			shipExterior.PaintToWorld(
-				leftTileX: extLeft,
-				topTileY: extTop,
+				leftTileX: extTileLeft,
+				topTileY: extTileTop,
 				paintAir: false,
 				respectLiquids: true,
 				flipHorizontally: isFlipped,
 				flipVertically: false
 			);
 			shipInterior.PaintToWorld(
-				leftTileX: intLeft,
-				topTileY: intTop,
+				leftTileX: intTileLeft,
+				topTileY: intTileTop,
 				paintAir: false,
 				respectLiquids: true,
 				flipHorizontally: isFlipped,
@@ -170,8 +170,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 			
 			this.ExteriorDeckWidth = TileFinderHelpers.GetFloorWidth(
 				nonFloorPattern: nonDeckPattern,
-				tileX: extLeft + (shipExterior.Bounds.Width / 2),
-				tileY: extTop,
+				tileX: extTileLeft + (shipExterior.Bounds.Width / 2),
+				tileY: extTileTop,
 				maxFallRange: 50,
 				floorX: out this.ExteriorDeckX,
 				floorY: out this.ExteriorDeckY
