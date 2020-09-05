@@ -9,10 +9,15 @@ v1
 	-	Prevent other guides from wandering upon captain's position
 -	Implement camera sine smoothing
 -	Finish implementing cutscene mechanics
+	-	Restore player position
 	-	Cleanup loaded set after all scenes traversed
 	-	Implement UI for dialogue choices responses
 -	Create intro cutscene
-	-	Implement dialogue
+	-	Implement interior scene + dialogue
+		-	Add screen shakes + sparks
+		-	Add dialogue "We're under attack!"
+		-	Spawn interior guides
+		-	Position player + incapacitate
 
 	-	Implement actors
 		-	Spawn and reveal pirates

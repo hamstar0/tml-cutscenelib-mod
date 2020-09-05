@@ -32,7 +32,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 				moveYFrom: (int)dungeonView.Y,
 				moveXTo: (int)dungeonView.X,
 				moveYTo: (int)dungeonView.Y - ( 4 * 16 ),
-				toDuration: 60 * 5,
+				toDuration: 10,//60 * 5,
 				lingerDuration: 0,
 				froDuration: 0,
 				onStop: () => {

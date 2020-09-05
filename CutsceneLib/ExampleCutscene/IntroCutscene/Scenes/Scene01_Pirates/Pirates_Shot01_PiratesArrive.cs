@@ -32,7 +32,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			int lowExteriorShipViewX = this.Set.ExteriorTileLeft * 16;
 			lowExteriorShipViewX += (this.Set.ExteriorDeckWidth + 24) * 16;
 			int lowExteriorShipViewY = (int)this.Set.ExteriorShipView.Y;
-			lowExteriorShipViewY += 12 * 16;
+			lowExteriorShipViewY += 8 * 16;
 			int next = cams.Count;
 
 			var cam = new CameraMover(
@@ -59,11 +59,15 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 		private void DrawInterface01_PiratesArrive() {
 			Main.instance.LoadNPC( NPCID.PirateShip );
 
+			Vector2 pos = this.PirateShipPos - Main.screenPosition;
+			pos.Y -= Main.npcTexture[NPCID.PirateShip].Height;
+			pos.Y -= 64;
+
 			Main.spriteBatch.Draw(
 				texture: Main.npcTexture[ NPCID.PirateShip ],
-				position: this.PirateShipPos - Main.screenPosition,
+				position: pos,
 				sourceRectangle: null,
-				color: Color.White,
+				color: Lighting.GetColor( (int)(this.PirateShipPos.X/16), (int)(this.PirateShipPos.Y/16) ),
 				rotation: 0,
 				origin: default( Vector2 ),
 				scale: 1f,

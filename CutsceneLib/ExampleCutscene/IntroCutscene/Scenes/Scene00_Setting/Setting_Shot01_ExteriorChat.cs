@@ -32,8 +32,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 				moveYFrom: (int)exteriorShipView.Y,
 				moveXTo: (int)exteriorShipView.X,
 				moveYTo: (int)exteriorShipView.Y - (12 * 16),
-				toDuration: 60 * 3,
-				lingerDuration: 60 * 3,
+				toDuration: 10,//60 * 3,
+				lingerDuration: 10,//60 * 3,
 				froDuration: 0,
 				onStop: () => {
 					onCamStop?.Invoke();
