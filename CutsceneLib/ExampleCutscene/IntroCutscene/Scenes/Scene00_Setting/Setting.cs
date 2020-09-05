@@ -38,16 +38,12 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 
 		protected override void OnBegin( IntroCutscene parent ) {
 			var cams = new List<CameraMover>();
-			Vector2 exteriorShipView = this.Set.ExteriorShipView;
-			Vector2 interiorShipView = this.Set.InteriorShipView;
-
-			bool isShipOnLeft = (int)exteriorShipView.X < ((16 * Main.maxTilesX) / 2);
 
 			this.BeginShot00_Title( parent );
 			
 			this.GetCam00_Title( cams, this.BeginShot01_ExteriorChat );
-			this.GetCam01_ExteriorChat( cams, this.BeginShot02_Dungeon, exteriorShipView );
-			this.GetCam02_Dungeon( cams, null, isShipOnLeft );
+			this.GetCam01_ExteriorChat( cams, this.BeginShot02_Dungeon );
+			this.GetCam02_Dungeon( cams, null );
 
 			CameraMover.Current = cams[0];
 		}

@@ -10,14 +10,15 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 	partial class Intro01_PiratesScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
-		private void BeginShot01_InteriorChat() {
+		private void BeginShot02_InteriorChat() {
 
 		}
 
 
 		////////////////
 
-		private void GetCam01_InteriorChat( IList<CameraMover> cams, Action onCamStop, Vector2 interiorShipView ) {
+		private void GetCam02_InteriorChat( IList<CameraMover> cams, Action onCamStop ) {
+			Vector2 interiorShipView = this.Set.InteriorShipView;
 			int next = cams.Count;
 
 			var cam = new CameraMover(

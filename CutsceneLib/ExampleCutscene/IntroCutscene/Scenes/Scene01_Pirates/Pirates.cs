@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using HamstarHelpers.Classes.CameraAnimation;
@@ -48,13 +47,12 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		protected override void OnBegin( IntroCutscene parent ) {
 			var cams = new List<CameraMover>();
-			Vector2 exteriorShipView = this.Set.ExteriorShipView;
-			Vector2 interiorShipView = this.Set.InteriorShipView;
 
 			this.BeginShot00_ExteriorAttack( parent );
 
-			this.GetCam00_ExteriorAttack( cams, this.BeginShot01_InteriorChat, exteriorShipView );
-			this.GetCam01_InteriorChat( cams, null, interiorShipView );
+			this.GetCam00_ExteriorAttack( cams, this.BeginShot01_PiratesArrive );
+			this.GetCam01_PiratesArrive( cams, this.BeginShot02_InteriorChat );
+			this.GetCam02_InteriorChat( cams, null );
 
 			CameraMover.Current = cams[0];
 		}
@@ -99,7 +97,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		public override void DrawInterface() {
 			switch( CameraMover.Current.Name ) {
-			case "CutsceneLib_Intro_Pirates_0":
+			case "CutsceneLib_Intro_Pirates_1":
+				this.DrawInterface01_PiratesArrive();
 				break;
 			}
 		}

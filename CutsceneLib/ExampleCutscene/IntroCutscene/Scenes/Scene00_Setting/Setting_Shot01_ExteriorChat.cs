@@ -22,8 +22,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 		
 		private void GetCam01_ExteriorChat(
 					IList<CameraMover> cams,
-					Action onCamStop,
-					Vector2 exteriorShipView ) {
+					Action onCamStop ) {
+			Vector2 exteriorShipView = this.Set.ExteriorShipView;
 			int next = cams.Count;
 			
 			var cam = new CameraMover(
@@ -74,7 +74,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 
 		private void DrawInterface01_ExteriorChat() {
 			NPC captain = Main.npc[ this.Set.ExteriorCrewCaptainNPC ];
-			var binocPos = captain.Center + new Vector2( 4, -8 );
+			var binocPos = captain.Center + new Vector2( 6, -9 );
 			binocPos = UIZoomHelpers.ConvertToScreenPosition( binocPos, null, null );
 
 			Main.spriteBatch.Draw(

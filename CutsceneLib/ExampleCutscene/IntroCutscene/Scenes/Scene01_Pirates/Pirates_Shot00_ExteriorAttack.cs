@@ -76,8 +76,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		private void GetCam00_ExteriorAttack(
 					IList<CameraMover> cams,
-					Action onCamStop,
-					Vector2 exteriorShipView ) {
+					Action onCamStop ) {
+			Vector2 exteriorShipView = this.Set.ExteriorShipView;
 			int next = cams.Count;
 
 			var cam = new CameraMover(

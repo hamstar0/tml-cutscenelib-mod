@@ -16,7 +16,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 
 		////////////////
 
-		private void GetCam02_Dungeon( IList<CameraMover> cams, Action onCamStop, bool isShipOnLeft ) {
+		private void GetCam02_Dungeon( IList<CameraMover> cams, Action onCamStop ) {
+			bool isShipOnLeft = (int)this.Set.ExteriorShipView.X < ( ( 16 * Main.maxTilesX ) / 2 );
 			var dungeonView = new Vector2( Main.dungeonX * 16, Main.dungeonY * 16 );
 			dungeonView.X += isShipOnLeft
 				? 0
