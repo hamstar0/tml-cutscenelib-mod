@@ -11,7 +11,8 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
-	partial class Intro01_PiratesScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
+	partial class Intro01_PiratesScene
+				: Scene<IntroCutscene, IntroMovieSet, IntroCutsceneStartProtocol, IntroCutsceneUpdateProtocol> {
 		private Vector2 PirateShipPos;
 
 
@@ -60,8 +61,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			Main.instance.LoadNPC( NPCID.PirateShip );
 
 			Vector2 pos = this.PirateShipPos - Main.screenPosition;
-			pos.Y -= Main.npcTexture[NPCID.PirateShip].Height;
-			pos.Y -= 64;
+			pos.Y -= Main.npcTexture[ NPCID.PirateShip ].Height;
+			pos.Y += 48;
 
 			Main.spriteBatch.Draw(
 				texture: Main.npcTexture[ NPCID.PirateShip ],

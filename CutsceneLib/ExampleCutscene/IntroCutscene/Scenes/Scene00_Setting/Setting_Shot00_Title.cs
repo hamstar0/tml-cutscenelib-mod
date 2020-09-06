@@ -10,7 +10,8 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
-	partial class Intro00_SettingScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
+	partial class Intro00_SettingScene
+				: Scene<IntroCutscene, IntroMovieSet, IntroCutsceneStartProtocol, IntroCutsceneUpdateProtocol> {
 		private void BeginShot00_Title( IntroCutscene cutscene ) {
 			if( Main.netMode == NetmodeID.MultiplayerClient ) {
 				return;

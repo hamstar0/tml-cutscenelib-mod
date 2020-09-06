@@ -4,10 +4,11 @@ using CutsceneLib.Net;
 
 
 namespace CutsceneLib.Definitions {
-	public abstract partial class Scene<T, U, V> : SceneBase
+	public abstract partial class Scene<T, U, V, W> : SceneBase
 				where T : Cutscene
 				where U : MovieSet
-				where V : CutsceneNetStart {
+				where V : CutsceneStartProtocol
+				where W : CutsceneUpdateProtocol {
 		/// <summary></summary>
 		/// <returns>`true` signifies scene has ended.</returns>
 		internal sealed override bool UpdateScene_Internal( Cutscene parent ) {

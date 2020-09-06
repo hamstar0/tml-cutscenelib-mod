@@ -22,16 +22,30 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
-		internal void SetCurrentScene( SceneID uid, bool sync ) {
+		internal void SetCurrentScene_Internal( SceneID uid, bool sync ) {
 			this.CurrentScene.EndScene_Internal( this );
-			this.CurrentScene = this.CreateScene( uid );
+			this.CurrentScene = this.CreateNextScene( uid );
 			this.CurrentScene.BeginScene_Internal( this );
 
 			if( sync ) {
 				if( Main.netMode == NetmodeID.Server ) {
-					CutsceneNetStart.SendToClients( cutscene: this, ignoreWho: -1 );
+					CutsceneStartProtocol.SendToClients( cutscene: this, ignoreWho: -1 );
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
-					CutsceneNetStart.Broadcast( cutscene: this );
+					CutsceneStartProtocol.Broadcast( cutscene: this );
+				}
+			}
+		}
+
+		internal void SetCurrentSceneFromNetwork_Internal( SceneID uid, CutsceneUpdateProtocol netData, bool sync ) {
+			this.CurrentScene.EndScene_Internal( this );
+			this.CurrentScene = this.CreateNextSceneFromNetwork( uid, netData );
+			this.CurrentScene.BeginScene_Internal( this );
+
+			if( sync ) {
+				if( Main.netMode == NetmodeID.Server ) {
+					CutsceneUpdateProtocol.SendToClients( cutscene: this, ignoreWho: -1 );
+				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
+					CutsceneUpdateProtocol.Broadcast( cutscene: this );
 				}
 			}
 		}
@@ -42,7 +56,7 @@ namespace CutsceneLib.Definitions {
 			SceneID nextUid = this.CurrentScene.GetNextSceneId();
 
 			if( nextUid != null ) {
-				this.SetCurrentScene( nextUid, sync );
+				this.SetCurrentScene_Internal( nextUid, sync );
 			} else {
 				CutsceneManager.Instance.EndCutscene( this.UniqueId, this.PlaysForWhom, sync );
 			}

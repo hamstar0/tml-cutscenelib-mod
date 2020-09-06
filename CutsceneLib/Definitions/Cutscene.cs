@@ -38,14 +38,18 @@ namespace CutsceneLib.Definitions {
 
 		////
 
-		protected abstract SceneBase CreateScene( SceneID sceneId );
+		protected abstract SceneBase CreateIntroScene();
 
-		protected abstract SceneBase CreateSceneFromNetwork( SceneID sceneId, CutsceneNetStart data );
+		protected abstract SceneBase CreateNextScene( SceneID sceneId );
+
+		protected abstract SceneBase CreateIntroSceneFromNetwork( CutsceneStartProtocol data );
+
+		protected abstract SceneBase CreateNextSceneFromNetwork( SceneID sceneId, CutsceneUpdateProtocol data );
 
 
 		////////////////
 
-		internal CutsceneNetStart CreatePacketPayload() {
+		internal CutsceneStartProtocol CreatePacketPayload() {
 			return this.CurrentScene.CreatePacketPayload_Internal( this );
 		}
 
@@ -56,17 +60,17 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
-		internal void BeginCutscene_Internal( SceneID sceneId ) {
-			this.CurrentScene = this.CreateScene( sceneId );
+		internal void BeginCutscene_Internal() {
+			this.CurrentScene = this.CreateIntroScene();
 			this.CurrentScene.BeginScene_Internal( this );
 		}
 
 		internal void BeginCutsceneFromNetwork_Internal(
 					SceneID sceneId,
-					CutsceneNetStart data,
+					CutsceneStartProtocol netData,
 					Action<string> onSuccess,
 					Action<string> onFail ) {
-			this.CurrentScene = this.CreateSceneFromNetwork( sceneId, data );
+			this.CurrentScene = this.CreateIntroSceneFromNetwork( netData );
 
 			if( this.CurrentScene != null ) {
 				this.CurrentScene.BeginScene_Internal( this );
@@ -76,7 +80,7 @@ namespace CutsceneLib.Definitions {
 
 			int retries = 0;
 			Timers.SetTimer( 2, true, () => {
-				this.CurrentScene = this.CreateSceneFromNetwork( sceneId, data );
+				this.CurrentScene = this.CreateIntroSceneFromNetwork( netData );
 
 				if( this.CurrentScene == null ) {
 					if( retries++ < 1000 ) {

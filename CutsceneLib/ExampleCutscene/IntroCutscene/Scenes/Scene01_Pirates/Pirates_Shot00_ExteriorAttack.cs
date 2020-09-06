@@ -11,7 +11,8 @@ using HamstarHelpers.Services.Timers;
 
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
-	partial class Intro01_PiratesScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
+	partial class Intro01_PiratesScene
+				: Scene<IntroCutscene, IntroMovieSet, IntroCutsceneStartProtocol, IntroCutsceneUpdateProtocol> {
 		private void BeginShot00_ExteriorAttack( IntroCutscene parent ) {
 			if( Main.netMode == NetmodeID.MultiplayerClient ) {
 				return;

@@ -8,7 +8,7 @@ using CutsceneLib.Net;
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Net {
 	[Serializable]
-	class IntroCutsceneNetData : CutsceneNetStart {
+	class IntroCutsceneStartProtocol : CutsceneStartProtocol {
 		public Vector2 ExteriorShipView;
 		public Vector2 InteriorShipView;
 		public int ExteriorDeckWidth;
@@ -24,9 +24,9 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Net {
 
 		////////////////
 
-		private IntroCutsceneNetData() : base() { }
+		private IntroCutsceneStartProtocol() : base() { }
 		
-		public IntroCutsceneNetData( IntroCutscene cutscene, IntroMovieSet set ) : base( cutscene, set ) {
+		public IntroCutsceneStartProtocol( IntroCutscene cutscene, IntroMovieSet set ) : base( cutscene, set ) {
 			this.ExteriorShipView = set.ExteriorShipView;
 			this.InteriorShipView = set.InteriorShipView;
 			this.ExteriorDeckWidth = set.ExteriorDeckWidth;

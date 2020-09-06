@@ -11,23 +11,24 @@ namespace CutsceneLib.Definitions {
 
 		////
 
-		public bool PrimaryViewerDefersToHostForSync { get; }
+		public bool PrimaryViewerDefersToHostForSync { get; protected set; }
 
+		public bool IsSiezingControls { get; protected set; }
 
-		////////////////
-
-		protected CutsceneDialogue Dialogue = null;
+		public bool IsCutscenePlayerImmune { get; protected set; }
 
 
 
 		////////////////
 		
-		protected SceneBase( bool primaryViewerDefersToHostForSync ) {
+		protected SceneBase( bool primaryViewerDefersToHostForSync, bool isSiezingControls, bool isCutscenePlayerImmune ) {
 			if( !this.ValidateSceneType(this.GetType()) ) {
 				throw new ModHelpersException( "Invalid Scene type "+this.GetType().Name );
 			}
 
 			this.PrimaryViewerDefersToHostForSync = primaryViewerDefersToHostForSync;
+			this.IsSiezingControls = isSiezingControls;
+			this.IsCutscenePlayerImmune = isCutscenePlayerImmune;
 		}
 
 		////
@@ -38,7 +39,7 @@ namespace CutsceneLib.Definitions {
 				return false;
 			}
 
-			Type genSceneType = typeof( Scene<,,> );
+			Type genSceneType = typeof( Scene<,,,> );
 			if( parentType.IsGenericType && parentType.GetGenericTypeDefinition() == genSceneType ) {
 				return true;
 			}
@@ -54,7 +55,16 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
-		internal abstract CutsceneNetStart CreatePacketPayload_Internal( Cutscene cutscene );
+		internal abstract CutsceneStartProtocol CreatePacketPayload_Internal( Cutscene cutscene );
+
+
+		////////////////
+
+		internal abstract void BeginScene_Internal( Cutscene parent );
+
+		////////////////
+
+		internal abstract void EndScene_Internal( Cutscene parent );
 
 
 		////////////////
@@ -63,25 +73,7 @@ namespace CutsceneLib.Definitions {
 		/// <returns>`true` signifies scene has ended.</returns>
 		internal abstract bool UpdateScene_Internal( Cutscene parent );
 
-
-		////////////////
-		
-		internal virtual void BeginScene_Internal( Cutscene parent ) {
-			if( parent.PlaysForWhom == Main.myPlayer ) {
-				this.Dialogue?.ShowDialogue();
-			}
-		}
-
-		////////////////
-		
-		internal virtual void EndScene_Internal( Cutscene parent ) {
-			if( parent.PlaysForWhom == Main.myPlayer ) {
-				this.Dialogue?.HideDialogue();
-			}
-		}
-
-
-		////////////////
+		////
 
 		public virtual bool UpdateNPC( NPC npc ) {
 			return true;

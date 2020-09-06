@@ -4,20 +4,19 @@ using Terraria.ID;
 using HamstarHelpers.Classes.Errors;
 using HamstarHelpers.Helpers.Debug;
 using HamstarHelpers.Services.Network.NetIO;
-using HamstarHelpers.Services.Network.NetIO.PayloadTypes;
 using CutsceneLib.Logic;
 using CutsceneLib.Definitions;
 
 
 namespace CutsceneLib.Net {
 	[Serializable]
-	public abstract class CutsceneNetStart : NetIOBroadcastPayload {
+	public abstract class CutsceneStartProtocol : CutsceneSceneDataProtocol {
 		public static void Broadcast( Cutscene cutscene ) {
 			if( Main.netMode != NetmodeID.MultiplayerClient ) {
 				throw new ModHelpersException( "Not client" );
 			}
 
-			CutsceneNetStart protocol = cutscene.CreatePacketPayload();
+			CutsceneStartProtocol protocol = cutscene.CreatePacketPayload();
 
 			NetIO.Broadcast( protocol );
 		}
@@ -27,7 +26,7 @@ namespace CutsceneLib.Net {
 				throw new ModHelpersException( "Not server" );
 			}
 
-			CutsceneNetStart protocol = cutscene.CreatePacketPayload();
+			CutsceneStartProtocol protocol = cutscene.CreatePacketPayload();
 
 			NetIO.SendToClients(
 				data: protocol,
@@ -39,24 +38,9 @@ namespace CutsceneLib.Net {
 
 		////////////////
 
-		public int PlaysForWho = -1;
-		public string CutsceneModName = null;
-		public string CutsceneClassFullName = null;
-		public string SceneModName = null;
-		public string SceneClassFullName = null;
+		protected CutsceneStartProtocol() : base() { }
 
-
-
-		////////////////
-
-		protected CutsceneNetStart() { }
-
-		protected CutsceneNetStart( Cutscene cutscene, MovieSet set ) {
-			this.PlaysForWho = cutscene.PlaysForWhom;
-			this.CutsceneModName = cutscene.UniqueId.ModName;
-			this.CutsceneClassFullName = cutscene.UniqueId.FullClassName;
-			this.SceneModName = cutscene.CurrentScene.UniqueId.ModName;
-			this.SceneClassFullName = cutscene.CurrentScene.UniqueId.FullClassName;
+		protected CutsceneStartProtocol( Cutscene cutscene, MovieSet set ) : base( cutscene, set ) {
 /*LogHelpers.Log( "SEND "
 	+"PlaysForWho:"+this.PlaysForWho
 	+ ", CutsceneModName:" + this.CutsceneModName
@@ -68,18 +52,7 @@ namespace CutsceneLib.Net {
 
 		////////////////
 
-		public override bool ReceiveOnServerBeforeRebroadcast( int fromWho ) {
-			this.Receive();
-			return true;
-		}
-
-		public override void ReceiveBroadcastOnClient() {
-			this.Receive();
-		}
-
-		////
-
-		private void Receive() {
+		protected sealed override void Receive() {
 /*LogHelpers.Log( "RECEIVE "
 	+"PlaysForWho:"+this.PlaysForWho
 	+ ", CutsceneModName:" + this.CutsceneModName

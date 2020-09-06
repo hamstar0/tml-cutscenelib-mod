@@ -6,7 +6,13 @@ using HamstarHelpers.Helpers.Debug;
 
 namespace CutsceneLib.Definitions {
 	public abstract partial class Cutscene {
-		public abstract bool IsSiezingControls();
+		internal bool IsSiezingControls_Internal() {
+			return this.CurrentScene?.IsSiezingControls ?? true;
+		}
+
+		internal bool IsCutscenePlayerImmune_Internal() {
+			return this.CurrentScene?.IsCutscenePlayerImmune ?? true;
+		}
 		
 		////
 

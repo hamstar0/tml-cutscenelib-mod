@@ -64,7 +64,7 @@ namespace CutsceneLib.Logic {
 				return false;
 			}
 
-			return this.TryBeginCutscene( cutscene, cutscene.FirstSceneId, sync, out result );
+			return this.TryBeginCutscene( cutscene, sync, out result );
 		}
 		
 		/*public bool TryBeginCutscene(
@@ -84,7 +84,6 @@ namespace CutsceneLib.Logic {
 
 		private bool TryBeginCutscene(
 					Cutscene cutscene,
-					SceneID sceneId,
 					bool sync, 
 					out string result ) {
 			int playsForWhom = cutscene.PlaysForWhom;
@@ -95,7 +94,7 @@ namespace CutsceneLib.Logic {
 				return false;
 			}
 			
-			cutscene.BeginCutscene_Internal( sceneId );
+			cutscene.BeginCutscene_Internal();
 
 			this._CutscenePerPlayer[ playsForWhom ] = cutscene;
 
@@ -107,9 +106,9 @@ namespace CutsceneLib.Logic {
 
 			if( sync ) {
 				if( Main.netMode == NetmodeID.Server ) {
-					CutsceneNetStart.SendToClients( cutscene: cutscene, ignoreWho: -1 );
+					CutsceneStartProtocol.SendToClients( cutscene: cutscene, ignoreWho: -1 );
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
-					CutsceneNetStart.Broadcast( cutscene: cutscene );
+					CutsceneStartProtocol.Broadcast( cutscene: cutscene );
 				}
 			}
 
@@ -123,7 +122,7 @@ namespace CutsceneLib.Logic {
 					CutsceneID cutsceneId,
 					SceneID sceneId,
 					Player playsFor,
-					CutsceneNetStart data,
+					CutsceneStartProtocol data,
 					Action<string> onSuccess,
 					Action<string> onFail ) {
 			if( !this.CanBeginCutscene(false, cutsceneId, playsFor, out Cutscene cutscene, out string result) ) {
@@ -165,7 +164,12 @@ namespace CutsceneLib.Logic {
 
 		////////////////
 
-		public bool SetCutsceneScene( CutsceneID cutsceneId, Player playsFor, SceneID sceneId, bool sync ) {
+		internal bool SetCutsceneSceneFromNetwork(
+					CutsceneID cutsceneId,
+					Player playsFor,
+					SceneID sceneId,
+					CutsceneUpdateProtocol netData,
+					bool sync ) {
 			Cutscene cutscene = this._CutscenePerPlayer.GetOrDefault( playsFor.whoAmI );
 			if( cutscene == null ) {
 				return false;
@@ -174,7 +178,7 @@ namespace CutsceneLib.Logic {
 				return false;
 			}
 
-			cutscene.SetCurrentScene( sceneId, sync );
+			cutscene.SetCurrentSceneFromNetwork_Internal( sceneId, netData, sync );
 			return true;
 		}
 
@@ -201,9 +205,9 @@ namespace CutsceneLib.Logic {
 
 			if( sync ) {
 				if( Main.netMode == NetmodeID.Server ) {
-					CutsceneNetEnd.SendToClients( cutscene: cutscene, ignoreWho: -1 );
+					CutsceneEndProtocol.SendToClients( cutscene: cutscene, ignoreWho: -1 );
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
-					CutsceneNetEnd.Broadcast( cutscene: cutscene );
+					CutsceneEndProtocol.Broadcast( cutscene: cutscene );
 				}
 			}
 			return true;

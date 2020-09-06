@@ -42,11 +42,6 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		public override bool CanReplayPerPlayer => false;
 
 
-		////
-
-		public override bool IsSiezingControls() => true;
-
-
 
 		////////////////
 		

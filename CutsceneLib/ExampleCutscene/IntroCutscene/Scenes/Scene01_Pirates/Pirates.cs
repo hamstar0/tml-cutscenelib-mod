@@ -10,13 +10,10 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting;
 
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
-	partial class Intro01_PiratesScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
+	partial class Intro01_PiratesScene
+				: Scene<IntroCutscene, IntroMovieSet, IntroCutsceneStartProtocol, IntroCutsceneUpdateProtocol> {
 		public static Intro01_PiratesScene Create( IntroCutscene cutscene ) {
 			var currScene = cutscene.CurrentScene as Intro00_SettingScene;
-			if( currScene == null ) {
-				return null;
-			}
-
 			return new Intro01_PiratesScene( currScene.Set );
 		}
 
@@ -29,11 +26,20 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			sceneType: typeof(Intro01_PiratesScene)
 		);
 
+		////
+
+		protected DialogueChoices Dialogue = new DialogueChoices(
+			dialogue: "",
+			choices: new List<DialogueChoices>(),
+			onChoice: () => {
+			}
+		);
+
 
 
 		////////////////
-		
-		public Intro01_PiratesScene( IntroMovieSet set )  : base( false, set ) { }
+
+		public Intro01_PiratesScene( IntroMovieSet set )  : base( false, true, true, set ) { }
 
 
 		////////////////
@@ -51,7 +57,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			this.BeginShot00_ExteriorAttack( parent );
 
 			this.GetCam00_ExteriorAttack( cams, this.BeginShot01_PiratesArrive );
-			this.GetCam01_PiratesArrive( cams, this.BeginShot02_InteriorChat );
+			this.GetCam01_PiratesArrive( cams, () => this.BeginShot02_InteriorChat(parent) );
 			this.GetCam02_InteriorChat( cams, null );
 
 			CameraMover.Current = cams[0];
@@ -61,35 +67,25 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 		////////////////
 
 		protected override bool Update( IntroCutscene parent ) {
+			var cam = CameraMover.Current;
+
 			if( Main.netMode != NetmodeID.Server ) {
-				var cam = CameraMover.Current;
 				if( cam == null || !cam.Name.StartsWith( "CutsceneLib_Intro_Pirates_" ) || !cam.IsAnimating() ) {
 					return true;
 				}
 			}
 
+			switch( cam.Name ) {
+			case "CutsceneLib_Intro_Pirates_0":
+				break;
+			case "CutsceneLib_Intro_Pirates_1":
+				break;
+			case "CutsceneLib_Intro_Pirates_2":
+				this.UpdateNPC02_InteriorChat( parent );
+				break;
+			}
+
 			return false;
-		}
-
-		////
-
-		public override bool UpdateNPC( NPC npc ) {
-			var cam = CameraMover.Current;
-
-			switch( cam.Name ) {
-			case "CutsceneLib_Intro_Pirates_0":
-				break;
-			}
-			return true;
-		}
-
-		public override void UpdateNPCFrame( NPC npc, int frameHeight ) {
-			var cam = CameraMover.Current;
-
-			switch( cam.Name ) {
-			case "CutsceneLib_Intro_Pirates_0":
-				break;
-			}
 		}
 
 
@@ -97,8 +93,12 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		public override void DrawInterface() {
 			switch( CameraMover.Current.Name ) {
+			case "CutsceneLib_Intro_Pirates_0":
+				break;
 			case "CutsceneLib_Intro_Pirates_1":
 				this.DrawInterface01_PiratesArrive();
+				break;
+			case "CutsceneLib_Intro_Pirates_2":
 				break;
 			}
 		}

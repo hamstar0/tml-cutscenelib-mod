@@ -11,14 +11,18 @@ v1
 -	Finish implementing cutscene mechanics
 	-	Restore player position
 	-	Cleanup loaded set after all scenes traversed
-	-	Implement UI for dialogue choices responses
 -	Create intro cutscene
 	-	Implement interior scene + dialogue
 		-	Add screen shakes + sparks
 		-	Add dialogue "We're under attack!"
+			-	Implement button to progress dialogue
+			-	Draw dialogue panel at top with button
+			-	Lock view while dialogue in session
 		-	Spawn interior guides
 		-	Position player + incapacitate
+	-	Implement pirate ship as a prop
 
+	-	Implement 'props' (type of generic custom NPC)
 	-	Implement actors
 		-	Spawn and reveal pirates
 		-	Kill guides with cannon fire

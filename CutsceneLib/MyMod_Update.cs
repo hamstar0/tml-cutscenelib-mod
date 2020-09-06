@@ -25,7 +25,7 @@ namespace CutsceneLib {
 			if( CutsceneLibConfig.Instance.DebugModeFreeMove ) { return; }
 
 			Cutscene nowCutscene = CutsceneManager.Instance?.GetCurrentCutscene_Player( Main.LocalPlayer );
-			if( nowCutscene?.IsSiezingControls() != true ) {
+			if( nowCutscene?.IsSiezingControls_Internal() != true ) {
 				return;
 			}
 

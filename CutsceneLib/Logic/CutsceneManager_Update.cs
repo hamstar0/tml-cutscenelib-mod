@@ -72,8 +72,10 @@ namespace CutsceneLib.Logic {
 				return;
 			}
 
-			myplayer.player.immune = true;
-			myplayer.player.immuneTime = 2;
+			if( cutscene.IsCutscenePlayerImmune_Internal() ) {
+				myplayer.player.immune = true;
+				myplayer.player.immuneTime = 2;
+			}
 
 			if( !CutsceneLibConfig.Instance.DebugModeFreeMove ) {
 				if( Main.netMode != NetmodeID.Server ) {

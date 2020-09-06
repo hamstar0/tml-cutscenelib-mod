@@ -57,7 +57,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		}
 
 
-		internal static IntroMovieSet Create( IntroCutsceneNetData data ) {
+		internal static IntroMovieSet Create( IntroCutsceneStartProtocol data ) {
 			return new IntroMovieSet( data );
 		}
 	}

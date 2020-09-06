@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
 using HamstarHelpers.Classes.CameraAnimation;
@@ -11,7 +10,8 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates;
 
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
-	partial class Intro00_SettingScene : Scene<IntroCutscene, IntroMovieSet, IntroCutsceneNetData> {
+	partial class Intro00_SettingScene
+				: Scene<IntroCutscene, IntroMovieSet, IntroCutsceneStartProtocol, IntroCutsceneUpdateProtocol> {
 		public override SceneID UniqueId { get; } = new SceneID(
 			mod: CutsceneLibMod.Instance,
 			sceneType: typeof(Intro00_SettingScene)
@@ -21,7 +21,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 
 		////////////////
 
-		public Intro00_SettingScene( IntroMovieSet set )  : base( false, set ) { }
+		public Intro00_SettingScene( IntroMovieSet set )  : base( false, true, true, set ) { }
 
 
 		////////////////
@@ -68,6 +68,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 			var cam = CameraMover.Current;
 
 			switch( cam.Name ) {
+			case "CutsceneLib_Intro_Setting_0":
+				break;
 			case "CutsceneLib_Intro_Setting_1":
 				return this.UpdateNPC01_ExteriorChat( npc );
 			case "CutsceneLib_Intro_Setting_2":
@@ -80,8 +82,12 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 			var cam = CameraMover.Current;
 
 			switch( cam.Name ) {
+			case "CutsceneLib_Intro_Setting_0":
+				break;
 			case "CutsceneLib_Intro_Setting_1":
 				this.UpdateNPCFrame01_ExteriorChat( npc, frameHeight );
+				break;
+			case "CutsceneLib_Intro_Setting_2":
 				break;
 			}
 		}
@@ -96,6 +102,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 				break;
 			case "CutsceneLib_Intro_Setting_1":
 				this.DrawInterface01_ExteriorChat();
+				break;
+			case "CutsceneLib_Intro_Setting_2":
 				break;
 			}
 		}

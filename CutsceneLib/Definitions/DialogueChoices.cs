@@ -11,14 +11,13 @@ using HamstarHelpers.Services.UI.FreeHUD;
 
 
 namespace CutsceneLib.Definitions {
-	public class CutsceneDialogue : ILoadable {
+	public class DialogueChoices : ILoadable {
 		protected UIThemedTextPanel DialogueElem;
 
 
 		////////////////
 
-
-		private CutsceneDialogue CurrentChoice;
+		private DialogueChoices CurrentChoice;
 
 		private Func<bool> OnChoice;
 
@@ -29,18 +28,18 @@ namespace CutsceneLib.Definitions {
 
 		public string Dialogue { get; protected set; }
 
-		public IList<CutsceneDialogue> Choices { get; protected set; }
+		public IList<DialogueChoices> Choices { get; protected set; }
 
 
 
 		////////////////
 
-		private CutsceneDialogue() { }
+		private DialogueChoices() { }
 
-		public CutsceneDialogue( string dialogue ) : this( dialogue, new List<CutsceneDialogue>(), null ) { }
+		public DialogueChoices( string dialogue ) : this( dialogue, new List<DialogueChoices>(), null ) { }
 
-		public CutsceneDialogue( string dialogue, IList<CutsceneDialogue> choices, Func<bool> onChoice ) {
-			var singleton = ModContent.GetInstance<CutsceneDialogue>();
+		public DialogueChoices( string dialogue, IList<DialogueChoices> choices, Func<bool> onChoice ) {
+			var singleton = ModContent.GetInstance<DialogueChoices>();
 			this.DialogueElem = singleton.DialogueElem;
 
 			this.CurrentChoice = this;

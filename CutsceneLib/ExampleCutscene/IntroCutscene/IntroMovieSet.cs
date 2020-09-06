@@ -98,7 +98,9 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 		public int ExteriorDeckY;
 
 		public IList<int> ExteriorCrewNPCs = new List<int>();
-		public int ExteriorCrewCaptainNPC;
+		public int ExteriorCrewCaptainNPC = -1;
+		public int InteriorCrewNPC = -1;
+		public int ShipPropNPC = -1;
 
 		public Vector2 ExteriorShipView;
 		public Vector2 InteriorShipView;
@@ -107,7 +109,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 
 		////////////////
 
-		private IntroMovieSet( IntroCutsceneNetData data ) {
+		private IntroMovieSet( IntroCutsceneStartProtocol data ) {
 			this.ExteriorShipView = data.ExteriorShipView;
 			this.InteriorShipView = data.InteriorShipView;
 
