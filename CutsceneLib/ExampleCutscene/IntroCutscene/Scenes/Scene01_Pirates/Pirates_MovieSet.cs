@@ -24,7 +24,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			Main.instance.LoadNPC( NPCID.PirateShip );
 
 			int x = (this.Set.ExteriorTileLeft + this.Set.ExteriorDeckWidth + 48) * 16;
-			int y = (int)this.Set.ExteriorShipView.Y + (15 * 16);
+			int y = (int)this.Set.ExteriorShipView.Y + (14 * 16);
 			y -= Main.npcTexture[NPCID.PirateShip].Height / 2;
 
 			int shipNpcWho = NPC.NewNPC( x, y, ModContent.NPCType<PropNPC>() );

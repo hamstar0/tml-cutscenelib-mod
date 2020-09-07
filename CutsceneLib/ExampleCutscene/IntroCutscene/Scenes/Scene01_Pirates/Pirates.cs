@@ -116,10 +116,9 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 			switch( cam.Name ) {
 			case "CutsceneLib_Intro_Pirates_0":
-				break;
+				return this.UpdateNPC00_ExteriorAttack( npc );
 			case "CutsceneLib_Intro_Pirates_1":
-				//return this.UpdateNPC01_PiratesArrive( npc );
-				break;
+				return this.UpdateNPC01_PiratesArrive( npc );
 			case "CutsceneLib_Intro_Pirates_2":
 				return this.UpdateNPC02_InteriorChat( npc );
 			}
@@ -132,6 +131,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 		public override void UpdateNPCFrame( NPC npc, int frameHeight ) {
 			switch( CameraMover.Current.Name ) {
 			case "CutsceneLib_Intro_Pirates_0":
+				this.UpdateNPCFrame00_ExteriorAttack( npc, frameHeight );
 				break;
 			case "CutsceneLib_Intro_Pirates_1":
 				this.UpdateNPCFrame01_PiratesArrive( npc, frameHeight );

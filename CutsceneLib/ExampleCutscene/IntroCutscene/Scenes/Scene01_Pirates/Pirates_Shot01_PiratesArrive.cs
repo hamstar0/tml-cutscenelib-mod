@@ -45,12 +45,18 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		////////////////
 
-		/*private bool UpdateNPC01_PiratesArrive( NPC npc ) {
-			if( npc.whoAmI == this.Set.ShipPropNPC ) {
+		private bool UpdateNPC01_PiratesArrive( NPC npc ) {
+			if( npc.whoAmI == this.Set.InteriorCrewNPC ) {
+				npc.ai[0] = 0f;
+				npc.ai[1] = 0f;
+				npc.ai[2] = 0f;
+				npc.ai[3] = 0f;
+				npc.direction = -1;
+				npc.velocity = default( Vector2 );
 				return false;
 			}
 			return true;
-		}*/
+		}
 
 
 		////////////////

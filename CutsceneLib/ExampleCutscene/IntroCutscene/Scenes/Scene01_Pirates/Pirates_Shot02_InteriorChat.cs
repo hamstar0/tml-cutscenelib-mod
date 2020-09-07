@@ -6,7 +6,6 @@ using Terraria;
 using Terraria.ID;
 using HamstarHelpers.Classes.CameraAnimation;
 using HamstarHelpers.Helpers.Debug;
-using HamstarHelpers.Services.Timers;
 using CutsceneLib.Definitions;
 using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
@@ -14,6 +13,12 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 	partial class Intro01_PiratesScene
 				: Scene<IntroCutscene, IntroMovieSet, IntroCutsceneStartProtocol, IntroCutsceneUpdateProtocol> {
+		private int CannonHitLoopTimer = 90;
+
+
+
+		////////////////
+
 		private void BeginShot02_InteriorChat( IntroCutscene cutscene ) {
 			if( Main.netMode == NetmodeID.MultiplayerClient ) {
 				return;
@@ -23,25 +28,11 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 			var plrPos = new Vector2(
 				( this.Set.InteriorTileLeft + 48 ) * 16,
-				( this.Set.InteriorTileTop + 38 ) * 16
+				( this.Set.InteriorTileTop + 37 ) * 16
 			);
 
 			Player plr = Main.player[ cutscene.PlaysForWhom ];
 			plr.position = plrPos;
-
-			//
-
-			Timers.SetTimer( (int)(60f * 1.5f), false, () => {
-				var cam = new CameraShaker(
-					name: "CutsceneLib_Intro_Pirates_Shake_2",
-					peakMagnitude: 1f,
-					toDuration: 0,
-					lingerDuration: 0,
-					froDuration: 60,
-					onStop: () => { }
-				);
-				return false;
-			} );
 
 			//
 
@@ -70,7 +61,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				moveXTo: (int)interiorShipView.X,
 				moveYTo: (int)interiorShipView.Y,
 				toDuration: 0,
-				lingerDuration: 60 * 5,
+				lingerDuration: 60 * 30,
 				froDuration: 0,
 				onStop: () => {
 					onCamStop?.Invoke();
@@ -85,7 +76,45 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 		////////////////
 
 		private void Update02_InteriorChat( IntroCutscene cutscene ) {
-			// hold player + guides
+			if( this.CannonHitLoopTimer-- <= 0 ) {
+				this.CannonHitLoopTimer = Main.rand.Next( 60, 60 * 7 );
+				this.ApplyInteriorCannonHit();
+			}
+		}
+
+		private void ApplyInteriorCannonHit() {
+			Main.PlaySound( SoundID.Item62 );
+
+			var sparkOrigin = new Vector2(
+				( this.Set.InteriorTileLeft + 48 ) * 16,
+				( this.Set.InteriorTileTop + 28 ) * 16
+			);
+			sparkOrigin.X += Main.rand.Next( 0, 32 * 16 );
+			sparkOrigin.Y += Main.rand.Next( 0, 8 * 16 );
+
+			int sparks = Main.rand.Next( 4, 12 );
+			for( int i = 0; i < sparks; i++ ) {
+				Dust.NewDust(
+					Position: sparkOrigin,
+					Width: 16,
+					Height: 16,
+					Type: 204,
+					SpeedX: 0f,
+					SpeedY: 0f,
+					Alpha: 0,
+					newColor: new Color( 255, 255, 255 ),
+					Scale: 1f
+				);
+			}
+
+			CameraShaker.Current = new CameraShaker(
+				name: "CutsceneLib_Intro_Pirates_Shake_2",
+				peakMagnitude: 3f,
+				toDuration: 0,
+				lingerDuration: 0,
+				froDuration: 60,
+				onStop: () => { }
+			);
 		}
 
 
