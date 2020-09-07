@@ -12,13 +12,14 @@ v1
 	-	Restore player position
 	-	Cleanup loaded set after all scenes traversed
 	-	Pause cutscene if tabbed out or literally paused
+
 -	Create intro cutscene
 	-	Continue making cannon fire from the pirate ship
+	-	Enable mouse during cutscene
 	-	Implement interior scene + dialogue
 		-	Add dialogue choice event: "We're under attack! Do we stay and fight?"
 			-	Implement choice buttons
 			-	Lock view while dialogue in session
-
 			-	Draw dialogue panel at top with choice buttons
 		-	Add screen shakes + sparks
 		-	Fixes

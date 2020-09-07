@@ -58,7 +58,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 				moveXTo: worldX,
 				moveYTo: worldY,
 				toDuration: 0,
-				lingerDuration: 10,//60 * 5,
+				lingerDuration: 60 * 5,
 				froDuration: 0,
 				onStop: () => {
 					onCamStop?.Invoke();

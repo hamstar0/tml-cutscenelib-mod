@@ -14,12 +14,9 @@ using HamstarHelpers.Services.UI.FreeHUD;
 
 namespace CutsceneLib.Definitions {
 	public partial class DialogueChoices : ILoadable {
-		protected UIThemedPanel DialogueElem = null;
-		protected UIImage PortraitElem = null;
-		protected UIThemedText TextElem = null;
-
-
-		////////////////
+		private UIThemedPanel DialogueElem = null;
+		private UIImage PortraitElem = null;
+		private UIThemedText TextElem = null;
 
 		private IList<UITextPanelButton> ChoiceButtons = new List<UITextPanelButton>();
 
@@ -67,7 +64,9 @@ namespace CutsceneLib.Definitions {
 				i++;
 			}
 
+			this.DialogueElem.Recalculate();
 			this.DialogueElem.Show();
+			this.DialogueElem.Recalculate();
 		}
 
 

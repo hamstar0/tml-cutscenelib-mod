@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Terraria;
+using Terraria.ID;
 using HamstarHelpers.Classes.CameraAnimation;
 using HamstarHelpers.Helpers.Debug;
+using HamstarHelpers.Helpers.Fx;
 using CutsceneLib.Definitions;
 using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 
@@ -11,6 +13,12 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 	partial class Intro01_PiratesScene
 				: Scene<IntroCutscene, IntroMovieSet, IntroCutsceneStartProtocol, IntroCutsceneUpdateProtocol> {
+		private int CannonFireLoopTimer = 60;
+
+
+
+		////////////////
+
 		private void BeginShot01_PiratesArrive() {
 		}
 
@@ -40,6 +48,16 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			);
 
 			cams.Add( cam );
+		}
+
+
+		////////////////
+
+		private void Update01_PiratesArrive( IntroCutscene parent ) {
+			if( this.CannonFireLoopTimer-- <= 0 ) {
+				this.CannonFireLoopTimer = Main.rand.Next( 30, 60 * 3 );
+				this.FireCannon();
+			}
 		}
 
 
@@ -92,5 +110,20 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 			this.PirateShipPos.X -= 1;
 		}*/
+
+
+		////////////////
+
+		private void FireCannon() {
+			NPC ship = Main.npc[ this.Set.ShipPropNPC ];
+			Vector2 pos = ship.Center;
+			pos.X -= 16f;
+			pos.X += Main.rand.Next(4) * 48;
+			pos.Y -= 64;
+			pos.Y += Main.npcTexture[NPCID.PirateShip].Height / 2;
+
+			Main.PlaySound( SoundID.Item14, pos );
+			ParticleFxHelpers.MakeDustCloud( pos, 1 );
+		}
 	}
 }

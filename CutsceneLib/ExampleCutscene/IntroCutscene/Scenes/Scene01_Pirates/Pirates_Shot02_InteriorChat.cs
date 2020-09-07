@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
@@ -17,6 +16,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 		private int CannonHitLoopTimer = 90;
 
 		private DialogueChoices Dialogue;
+		private string ChoiceMade = null;
 
 
 
@@ -44,14 +44,14 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 			//
 
-			int guideWho = Main.npc.FirstOrDefault( n => n.type == NPCID.Guide ).whoAmI;
-
 			this.Dialogue = new DialogueChoices(
 				dialogue: "We're under attack! Do we stay and fight?",
 				portrait: ModContent.GetTexture( "CutsceneLib/ExampleCutscene/IntroCutscene/guide_head" ),
 				height: 224,
 				choices: new List<string> { "Bring it!", "Must escape!" },
 				( choice ) => {
+					this.ChoiceMade = choice;
+					this.Dialogue.HideDialogue();
 				}
 			);
 		}
@@ -63,6 +63,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			Vector2 interiorShipView = this.Set.InteriorShipView;
 			int next = cams.Count;
 
+			CameraMover copyCam = null;
 			var cam = new CameraMover(
 				name: "CutsceneLib_Intro_Pirates_" + cams.Count,
 				moveXFrom: (int)interiorShipView.X,
@@ -72,11 +73,19 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				toDuration: 0,
 				lingerDuration: 60 * 30,
 				froDuration: 0,
+				onTraversed: () => {
+					if( this.ChoiceMade == null ) {
+						copyCam.Seek( 1 );
+					} else if( copyCam.TicksElapsed < (59 * 30) ) {
+						copyCam.Seek( (60 * 30) - 2 );
+					}
+				},
 				onStop: () => {
 					onCamStop?.Invoke();
-					//CameraMover.Current = cams[next + 1];
+					CameraMover.Current = cams[next + 1];
 				}
 			);
+			copyCam = cam;
 
 			cams.Add( cam );
 		}
@@ -96,10 +105,10 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 			var sparkOrigin = new Vector2(
 				( this.Set.InteriorTileLeft + 40 ) * 16,
-				( this.Set.InteriorTileTop + 34 ) * 16
+				( this.Set.InteriorTileTop + 30 ) * 16
 			);
 			sparkOrigin.X += Main.rand.Next( 0, 34 * 16 );
-			sparkOrigin.Y += Main.rand.Next( 0, 9 * 16 );
+			sparkOrigin.Y += Main.rand.Next( 0, 8 * 16 );
 
 			int sparks = Main.rand.Next( 2, 12 );
 			for( int i = 0; i < sparks; i++ ) {
@@ -130,7 +139,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			int y = (int)(sparkOrigin.Y / 16f);
 			void blackout( bool on ) {
 				for( int i=x; i<(x+34); i++ ) {
-					for( int j=y; j<(y+9); j++ ) {
+					for( int j=y; j<(y+8); j++ ) {
 						if( Main.tile[x, y].wall <= 1 ) {
 							Main.tile[x, y].wall = (ushort)( on ? 1 : 0 );
 						}

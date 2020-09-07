@@ -19,10 +19,19 @@ namespace CutsceneLib {
 			}
 
 			foreach( GameInterfaceLayer layer in layers ) {
-				if( layer.Name.Equals( "Cutscene Lib: Titles" ) ) {
+				if( layer.Name.Equals("Vanilla: Cursor") ) {
 					continue;
 				}
-				if( layer.Name.StartsWith("ModHelpers:") && !layer.Name.Equals("ModHelpers: HUD UI") ) {
+				if( layer.Name.Equals("Cutscene Lib: Titles") ) {
+					continue;
+				}
+				if( layer.Name.Equals( "ModHelpers: HUD UI") ) {
+					continue;
+				}
+				if( layer.Name.Equals( "ModHelpers: Mod Lock" ) ) {
+					continue;
+				}
+				if( layer.Name.Equals( "ModHelpers: Debug Display" ) ) {
 					continue;
 				}
 				if( nowCutscene.AllowInterfaceLayer(layer) ) {

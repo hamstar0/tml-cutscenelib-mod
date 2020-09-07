@@ -70,7 +70,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 			this.GetCam00_ExteriorAttack( cams, this.BeginShot01_PiratesArrive );
 			this.GetCam01_PiratesArrive( cams, () => this.BeginShot02_InteriorChat(parent) );
-			this.GetCam02_InteriorChat( cams, null );
+			this.GetCam02_InteriorChat( cams, this.BeginShot03_TBC );
+			this.GetCam03_TBC( cams, null );
 
 			CameraMover.Current = cams[0];
 		}
@@ -91,9 +92,12 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			case "CutsceneLib_Intro_Pirates_0":
 				break;
 			case "CutsceneLib_Intro_Pirates_1":
+				this.Update01_PiratesArrive( parent );
 				break;
 			case "CutsceneLib_Intro_Pirates_2":
 				this.Update02_InteriorChat( parent );
+				break;
+			case "CutsceneLib_Intro_Pirates_3":
 				break;
 			}
 
@@ -112,6 +116,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				return this.UpdateNPC01_PiratesArrive( npc );
 			case "CutsceneLib_Intro_Pirates_2":
 				return this.UpdateNPC02_InteriorChat( npc );
+			case "CutsceneLib_Intro_Pirates_3":
+				break;
 			}
 			return true;
 		}
@@ -129,6 +135,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				break;
 			case "CutsceneLib_Intro_Pirates_2":
 				break;
+			case "CutsceneLib_Intro_Pirates_3":
+				break;
 			}
 		}
 
@@ -143,6 +151,9 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				//this.DrawInterface01_PiratesArrive();
 				break;
 			case "CutsceneLib_Intro_Pirates_2":
+				break;
+			case "CutsceneLib_Intro_Pirates_3":
+				this.DrawInterface03_TBC();
 				break;
 			}
 		}

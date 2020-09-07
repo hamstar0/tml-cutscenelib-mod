@@ -25,14 +25,14 @@ namespace CutsceneLib.Definitions {
 				this.PortraitElem = new UIImage( ModContent.GetTexture("Terraria/MapDeath") );
 				this.PortraitElem.Width.Set( 128f, 0f );
 				this.PortraitElem.Height.Set( 128f, 0f );
-				this.PortraitElem.Left.Set( 12f, 0f );
-				this.PortraitElem.Top.Set( 12f, 0f );
+				this.PortraitElem.Left.Set( 8f, 0f );
+				this.PortraitElem.Top.Set( 8f, 0f );
 				this.DialogueElem.AppendThemed( this.PortraitElem );
 
 				this.TextElem = new UIThemedText( UITheme.Vanilla, false, "" );
 				this.TextElem.Width.Set( -128f, 1f );
-				this.TextElem.Left.Set( 12f+128f, 0f );
-				this.TextElem.Top.Set( 12f, 0f );
+				this.TextElem.Left.Set( 12f + 128f, 0f );
+				this.TextElem.Top.Set( 8f, 0f );
 				this.DialogueElem.AppendThemed( this.TextElem );
 
 				this.DialogueElem.Hide();
