@@ -21,19 +21,13 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 		////
 
 		private int PreparePirateShip() {
-			var pirateShipPos = new Vector2(
-				( this.Set.ExteriorTileLeft + this.Set.ExteriorDeckWidth + 24 ) * 16,
-				(int)this.Set.ExteriorShipView.Y + ( 8 * 16 )
-			);
-
 			Main.instance.LoadNPC( NPCID.PirateShip );
 
-			int shipNpcWho = NPC.NewNPC(
-				(int)pirateShipPos.X,
-				(int)pirateShipPos.Y - ( Main.npcTexture[NPCID.PirateShip].Height / 2 ),
-				ModContent.NPCType<PropNPC>()
-			);
+			int x = (this.Set.ExteriorTileLeft + this.Set.ExteriorDeckWidth + 48) * 16;
+			int y = (int)this.Set.ExteriorShipView.Y + (15 * 16);
+			y -= Main.npcTexture[NPCID.PirateShip].Height / 2;
 
+			int shipNpcWho = NPC.NewNPC( x, y, ModContent.NPCType<PropNPC>() );
 			NPC ship = Main.npc[shipNpcWho];
 			ship.direction = -1;
 
@@ -49,13 +43,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 
 		private int PrepareInteriorCrew() {
-			var plrPos = new Vector2(
-				( this.Set.InteriorTileLeft + 48 ) * 16,
-				( this.Set.InteriorTileTop + 38 ) * 16
-			);
-
-			int x = (int)plrPos.X + (6 * 16);
-			int y = (int)plrPos.Y;
+			int x = (this.Set.InteriorTileLeft + 54) * 16;
+			int y = (this.Set.InteriorTileTop + 40) * 16;
 
 			int npcWho = NPC.NewNPC( x, y, NPCID.Guide );
 			Main.npc[npcWho].friendly = true;

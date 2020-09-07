@@ -45,7 +45,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 			//
 
-			this.IsSiezingControls = false;
+			this.IsSiezingControls = true;
 			this.IsCutscenePlayerImmune = false;
 
 			//
@@ -84,9 +84,24 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		////////////////
 
-		private void UpdateNPC02_InteriorChat( IntroCutscene cutscene ) {
-
+		private void Update02_InteriorChat( IntroCutscene cutscene ) {
 			// hold player + guides
+		}
+
+
+		////////////////
+
+		private bool UpdateNPC02_InteriorChat( NPC npc ) {
+			if( npc.whoAmI == this.Set.InteriorCrewNPC ) {
+				npc.ai[0] = 0f;
+				npc.ai[1] = 0f;
+				npc.ai[2] = 0f;
+				npc.ai[3] = 0f;
+				npc.direction = -1;
+				npc.velocity = default( Vector2 );
+				return false;
+			}
+			return true;
 		}
 	}
 }

@@ -18,9 +18,9 @@ v1
 			-	Implement button to progress dialogue
 			-	Draw dialogue panel at top with button
 			-	Lock view while dialogue in session
-		-	Spawn interior guides
-		-	Position player + incapacitate
 
+		-	Position player + incapacitate
+		-	Spawn interior guide
 	-	Implement pirate ship as a prop
 	-	Implement 'props' (type of generic custom NPC)
 	-	Implement actors

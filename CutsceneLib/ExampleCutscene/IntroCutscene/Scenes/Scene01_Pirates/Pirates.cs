@@ -100,14 +100,45 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			case "CutsceneLib_Intro_Pirates_0":
 				break;
 			case "CutsceneLib_Intro_Pirates_1":
-				this.UpdateNPC01_PiratesArrive( parent );
 				break;
 			case "CutsceneLib_Intro_Pirates_2":
-				this.UpdateNPC02_InteriorChat( parent );
+				this.Update02_InteriorChat( parent );
 				break;
 			}
 
 			return false;
+		}
+
+		////
+
+		public override bool UpdateNPC( NPC npc ) {
+			var cam = CameraMover.Current;
+
+			switch( cam.Name ) {
+			case "CutsceneLib_Intro_Pirates_0":
+				break;
+			case "CutsceneLib_Intro_Pirates_1":
+				//return this.UpdateNPC01_PiratesArrive( npc );
+				break;
+			case "CutsceneLib_Intro_Pirates_2":
+				return this.UpdateNPC02_InteriorChat( npc );
+			}
+			return true;
+		}
+
+
+		////////////////
+
+		public override void UpdateNPCFrame( NPC npc, int frameHeight ) {
+			switch( CameraMover.Current.Name ) {
+			case "CutsceneLib_Intro_Pirates_0":
+				break;
+			case "CutsceneLib_Intro_Pirates_1":
+				this.UpdateNPCFrame01_PiratesArrive( npc, frameHeight );
+				break;
+			case "CutsceneLib_Intro_Pirates_2":
+				break;
+			}
 		}
 
 
