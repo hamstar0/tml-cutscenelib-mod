@@ -88,7 +88,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				moveXTo: (int)exteriorShipView.X,
 				moveYTo: (int)exteriorShipView.Y,
 				toDuration: 0,
-				lingerDuration: 60 * 10,
+				lingerDuration: 60 * 8,
 				froDuration: 0,
 				onStop: () => {
 					onCamStop?.Invoke();

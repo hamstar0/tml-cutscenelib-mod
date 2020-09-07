@@ -30,7 +30,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				moveYFrom: lowExteriorShipViewY,
 				moveXTo: (int)this.Set.ExteriorShipView.X,
 				moveYTo: lowExteriorShipViewY,
-				toDuration: 60 * 15,
+				toDuration: 60 * 13,
 				lingerDuration: 0,
 				froDuration: 0,
 				onStop: () => {

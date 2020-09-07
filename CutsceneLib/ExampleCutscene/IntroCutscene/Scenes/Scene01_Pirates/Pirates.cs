@@ -26,15 +26,6 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			sceneType: typeof(Intro01_PiratesScene)
 		);
 
-		////
-
-		//protected DialogueChoices Dialogue = new DialogueChoices(
-		//	dialogue: "",
-		//	choices: new List<DialogueChoices>(),
-		//	onChoice: () => {
-		//	}
-		//);
-
 
 
 		////////////////

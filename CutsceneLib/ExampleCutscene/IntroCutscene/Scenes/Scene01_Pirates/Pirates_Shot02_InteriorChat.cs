@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.ID;
+using Terraria.ModLoader;
 using HamstarHelpers.Classes.CameraAnimation;
 using HamstarHelpers.Helpers.Debug;
 using CutsceneLib.Definitions;
@@ -14,6 +15,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 	partial class Intro01_PiratesScene
 				: Scene<IntroCutscene, IntroMovieSet, IntroCutsceneStartProtocol, IntroCutsceneUpdateProtocol> {
 		private int CannonHitLoopTimer = 90;
+
+		private DialogueChoices Dialogue;
 
 
 
@@ -27,7 +30,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			//
 
 			var plrPos = new Vector2(
-				( this.Set.InteriorTileLeft + 48 ) * 16,
+				( this.Set.InteriorTileLeft + 46 ) * 16,
 				( this.Set.InteriorTileTop + 37 ) * 16
 			);
 
@@ -43,8 +46,14 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 			int guideWho = Main.npc.FirstOrDefault( n => n.type == NPCID.Guide ).whoAmI;
 
-			//this.Dialogue.ShowDialogue();
-			// display dialogue from guide: "We're under attack!"
+			this.Dialogue = new DialogueChoices(
+				dialogue: "We're under attack! Do we stay and fight?",
+				portrait: ModContent.GetTexture( "CutsceneLib/ExampleCutscene/IntroCutscene/guide_head" ),
+				height: 224,
+				choices: new List<string> { "Bring it!", "Must escape!" },
+				( choice ) => {
+				}
+			);
 		}
 
 
@@ -77,7 +86,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		private void Update02_InteriorChat( IntroCutscene cutscene ) {
 			if( this.CannonHitLoopTimer-- <= 0 ) {
-				this.CannonHitLoopTimer = Main.rand.Next( 60, 60 * 7 );
+				this.CannonHitLoopTimer = Main.rand.Next( 60, 60 * 3 );
 				this.ApplyInteriorCannonHit();
 			}
 		}
@@ -86,25 +95,26 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			Main.PlaySound( SoundID.Item62 );
 
 			var sparkOrigin = new Vector2(
-				( this.Set.InteriorTileLeft + 48 ) * 16,
-				( this.Set.InteriorTileTop + 28 ) * 16
+				( this.Set.InteriorTileLeft + 40 ) * 16,
+				( this.Set.InteriorTileTop + 34 ) * 16
 			);
-			sparkOrigin.X += Main.rand.Next( 0, 32 * 16 );
-			sparkOrigin.Y += Main.rand.Next( 0, 8 * 16 );
+			sparkOrigin.X += Main.rand.Next( 0, 34 * 16 );
+			sparkOrigin.Y += Main.rand.Next( 0, 9 * 16 );
 
-			int sparks = Main.rand.Next( 4, 12 );
+			int sparks = Main.rand.Next( 2, 12 );
 			for( int i = 0; i < sparks; i++ ) {
-				Dust.NewDust(
+				int idx = Dust.NewDust(
 					Position: sparkOrigin,
-					Width: 16,
-					Height: 16,
-					Type: 204,
+					Width: 8,
+					Height: 8,
+					Type: 158,  //204, 87, 64, 269
 					SpeedX: 0f,
 					SpeedY: 0f,
 					Alpha: 0,
 					newColor: new Color( 255, 255, 255 ),
 					Scale: 1f
 				);
+				Main.dust[idx].noLight = true;
 			}
 
 			CameraShaker.Current = new CameraShaker(
@@ -115,6 +125,34 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				froDuration: 60,
 				onStop: () => { }
 			);
+
+			/*int x = (int)(sparkOrigin.X / 16f);
+			int y = (int)(sparkOrigin.Y / 16f);
+			void blackout( bool on ) {
+				for( int i=x; i<(x+34); i++ ) {
+					for( int j=y; j<(y+9); j++ ) {
+						if( Main.tile[x, y].wall <= 1 ) {
+							Main.tile[x, y].wall = (ushort)( on ? 1 : 0 );
+						}
+					}
+				}
+			}
+
+			//
+
+			blackout( true );
+			Timers.SetTimer( 6, false, () => {
+				blackout( false );
+				return false;
+			} );
+			Timers.SetTimer( 12, false, () => {
+				blackout( true );
+				return false;
+			} );
+			Timers.SetTimer( 18, false, () => {
+				blackout( false );
+				return false;
+			} );*/
 		}
 
 
