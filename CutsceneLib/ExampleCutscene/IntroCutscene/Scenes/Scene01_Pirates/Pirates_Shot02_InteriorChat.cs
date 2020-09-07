@@ -19,6 +19,8 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				return;
 			}
 
+			//
+
 			var plrPos = new Vector2(
 				( this.Set.InteriorTileLeft + 48 ) * 16,
 				( this.Set.InteriorTileTop + 38 ) * 16
@@ -26,25 +28,6 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 			Player plr = Main.player[ cutscene.PlaysForWhom ];
 			plr.position = plrPos;
-
-			//
-
-			int x = (int)plrPos.X + (56 * 16);
-			int y = (int)plrPos.Y;
-
-			int npcWho = NPC.NewNPC( x, y, NPCID.Guide );
-			Main.npc[npcWho].friendly = true;
-			Main.npc[npcWho].color = new Color(
-				Main.rand.Next( 192, 255 ),
-				Main.rand.Next( 192, 255 ),
-				Main.rand.Next( 192, 255 )
-			);
-
-			this.Set.InteriorCrewNPC = npcWho;
-
-			if( Main.netMode != NetmodeID.SinglePlayer ) {
-				NetMessage.SendData( MessageID.SyncNPC, -1, -1, null, npcWho );
-			}
 
 			//
 
@@ -69,7 +52,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 			int guideWho = Main.npc.FirstOrDefault( n => n.type == NPCID.Guide ).whoAmI;
 
-			this.Dialogue.ShowDialogue();
+			//this.Dialogue.ShowDialogue();
 			// display dialogue from guide: "We're under attack!"
 		}
 

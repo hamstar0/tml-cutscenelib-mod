@@ -33,8 +33,8 @@ namespace CutsceneLib.Definitions {
 		
 		////////////////
 		
-		public virtual bool AllowNPC( NPC npc ) {
-			return npc.friendly;
+		internal bool AllowNPC_Internal( NPC npc ) {
+			return this.CurrentScene?.AllowNPC_Internal( this, npc ) ?? true;
 		}
 
 

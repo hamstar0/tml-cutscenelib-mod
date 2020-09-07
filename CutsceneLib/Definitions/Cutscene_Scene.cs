@@ -29,9 +29,9 @@ namespace CutsceneLib.Definitions {
 
 			if( sync ) {
 				if( Main.netMode == NetmodeID.Server ) {
-					CutsceneStartProtocol.SendToClients( cutscene: this, ignoreWho: -1 );
+					CutsceneUpdateProtocol.SendToClients( cutscene: this, ignoreWho: -1 );
 				} else if( Main.netMode == NetmodeID.MultiplayerClient ) {
-					CutsceneStartProtocol.Broadcast( cutscene: this );
+					CutsceneUpdateProtocol.Broadcast( cutscene: this );
 				}
 			}
 		}

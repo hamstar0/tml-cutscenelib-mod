@@ -36,6 +36,22 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 
 		////////////////
 
+		public override bool AllowNPC( IntroCutscene parent, NPC npc ) {
+			if( npc.friendly ) {
+				return true;
+			}
+			if( parent._ShipInterior.Bounds.Intersects(npc.getRect()) ) {
+				return false;
+			}
+			if( parent._ShipExterior.Bounds.Intersects(npc.getRect()) ) {
+				return false;
+			}
+			return true;
+		}
+
+
+		////////////////
+
 		protected override void OnBegin( IntroCutscene parent ) {
 			var cams = new List<CameraMover>();
 

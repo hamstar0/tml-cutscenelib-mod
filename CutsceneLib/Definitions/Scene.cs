@@ -44,6 +44,17 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
+		internal sealed override bool AllowNPC_Internal( Cutscene parent, NPC npc ) {
+			return this.AllowNPC( (T)parent, npc );
+		}
+
+		////
+
+		public abstract bool AllowNPC( T parent, NPC npc );
+
+
+		////////////////
+
 		internal sealed override void BeginScene_Internal( Cutscene parent ) {
 			this.OnBegin( (T)parent );
 		}

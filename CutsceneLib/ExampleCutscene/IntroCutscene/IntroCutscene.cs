@@ -11,8 +11,8 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates;
 
 namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 	partial class IntroCutscene : Cutscene {
-		private TileStructure _ShipExterior;
-		private TileStructure _ShipInterior;
+		internal TileStructure _ShipExterior;
+		internal TileStructure _ShipInterior;
 		private int _MovieSetChunksRequestRetryTimer = 0;
 
 

@@ -55,6 +55,11 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
+		internal abstract bool AllowNPC_Internal( Cutscene parent, NPC npc );
+
+
+		////////////////
+
 		internal abstract CutsceneStartProtocol CreatePacketPayload_Internal( Cutscene cutscene );
 
 

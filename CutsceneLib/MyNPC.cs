@@ -36,7 +36,7 @@ namespace CutsceneLib {
 				return base.PreAI( npc );
 			}
 			
-			if( !nowCutscene.AllowNPC(npc) ) {
+			if( !nowCutscene.AllowNPC_Internal(npc) ) {
 				npc.active = false;
 				npc.life = 0;
 			}

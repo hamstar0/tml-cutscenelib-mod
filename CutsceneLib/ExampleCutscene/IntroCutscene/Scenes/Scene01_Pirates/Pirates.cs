@@ -28,12 +28,12 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		////
 
-		protected DialogueChoices Dialogue = new DialogueChoices(
-			dialogue: "",
-			choices: new List<DialogueChoices>(),
-			onChoice: () => {
-			}
-		);
+		//protected DialogueChoices Dialogue = new DialogueChoices(
+		//	dialogue: "",
+		//	choices: new List<DialogueChoices>(),
+		//	onChoice: () => {
+		//	}
+		//);
 
 
 
@@ -51,8 +51,29 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		////////////////
 
+		public override bool AllowNPC( IntroCutscene parent, NPC npc ) {
+			if( npc.friendly ) {
+				return true;
+			}
+			if( npc.whoAmI == this.Set.ShipPropNPC ) {
+				return true;
+			}
+			if( parent._ShipInterior.Bounds.Intersects(npc.getRect()) ) {
+				return false;
+			}
+			if( parent._ShipExterior.Bounds.Intersects(npc.getRect()) ) {
+				return false;
+			}
+			return true;
+		}
+
+
+		////////////////
+
 		protected override void OnBegin( IntroCutscene parent ) {
 			var cams = new List<CameraMover>();
+
+			this.PrepareMovieSet();
 
 			this.BeginShot00_ExteriorAttack( parent );
 
@@ -79,6 +100,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			case "CutsceneLib_Intro_Pirates_0":
 				break;
 			case "CutsceneLib_Intro_Pirates_1":
+				this.UpdateNPC01_PiratesArrive( parent );
 				break;
 			case "CutsceneLib_Intro_Pirates_2":
 				this.UpdateNPC02_InteriorChat( parent );
@@ -96,7 +118,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			case "CutsceneLib_Intro_Pirates_0":
 				break;
 			case "CutsceneLib_Intro_Pirates_1":
-				this.DrawInterface01_PiratesArrive();
+				//this.DrawInterface01_PiratesArrive();
 				break;
 			case "CutsceneLib_Intro_Pirates_2":
 				break;

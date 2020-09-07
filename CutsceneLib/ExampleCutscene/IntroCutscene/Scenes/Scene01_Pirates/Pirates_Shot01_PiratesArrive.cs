@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Terraria;
-using Terraria.ID;
 using HamstarHelpers.Classes.CameraAnimation;
 using HamstarHelpers.Helpers.Debug;
 using CutsceneLib.Definitions;
@@ -13,17 +11,7 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Net;
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 	partial class Intro01_PiratesScene
 				: Scene<IntroCutscene, IntroMovieSet, IntroCutsceneStartProtocol, IntroCutsceneUpdateProtocol> {
-		private Vector2 PirateShipPos;
-
-
-
-		////////////////
-
 		private void BeginShot01_PiratesArrive() {
-			this.PirateShipPos = new Vector2(
-				(this.Set.ExteriorTileLeft + this.Set.ExteriorDeckWidth + 24) * 16,
-				(int)this.Set.ExteriorShipView.Y + (12 * 16)
-			);
 		}
 
 
@@ -57,7 +45,16 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		////////////////
 
-		private void DrawInterface01_PiratesArrive() {
+		private void UpdateNPC01_PiratesArrive( IntroCutscene parent ) {
+			NPC ship = Main.npc[ this.Set.ShipPropNPC ];
+			ship.direction = -1;
+			ship.velocity = new Vector2( -1.5f, 0f );
+		}
+
+
+		////////////////
+
+		/*private void DrawInterface01_PiratesArrive() {
 			Main.instance.LoadNPC( NPCID.PirateShip );
 
 			Vector2 pos = this.PirateShipPos - Main.screenPosition;
@@ -77,6 +74,6 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 			);
 
 			this.PirateShipPos.X -= 1;
-		}
+		}*/
 	}
 }
