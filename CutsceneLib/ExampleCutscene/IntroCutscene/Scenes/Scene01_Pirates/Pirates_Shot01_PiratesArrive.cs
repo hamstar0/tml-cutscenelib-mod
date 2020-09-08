@@ -38,9 +38,10 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				moveYFrom: lowExteriorShipViewY,
 				moveXTo: (int)this.Set.ExteriorShipView.X,
 				moveYTo: lowExteriorShipViewY,
-				toDuration: 60 * 13,
+				toDuration: 60 * 10,
 				lingerDuration: 0,
 				froDuration: 0,
+				isSmoothed: true,
 				onStop: () => {
 					onCamStop?.Invoke();
 					CameraMover.Current = cams[next + 1];

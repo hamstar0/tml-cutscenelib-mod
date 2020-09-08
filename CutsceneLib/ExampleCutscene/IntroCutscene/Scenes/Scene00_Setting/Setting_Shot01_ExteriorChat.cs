@@ -36,6 +36,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 				toDuration: 60 * 3,
 				lingerDuration: 60 * 3,
 				froDuration: 0,
+				isSmoothed: true,
 				onStop: () => {
 					onCamStop?.Invoke();
 					CameraMover.Current = cams[next + 1];

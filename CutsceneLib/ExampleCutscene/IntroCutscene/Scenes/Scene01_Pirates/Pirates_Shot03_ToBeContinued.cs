@@ -32,6 +32,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				toDuration: 0,
 				lingerDuration: 60 * 5,
 				froDuration: 0,
+				isSmoothed: false,
 				onStop: () => {
 					onCamStop?.Invoke();
 					//CameraMover.Current = cams[next + 1];

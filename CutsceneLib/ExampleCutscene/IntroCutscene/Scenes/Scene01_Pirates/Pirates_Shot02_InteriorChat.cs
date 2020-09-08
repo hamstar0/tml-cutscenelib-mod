@@ -73,6 +73,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				toDuration: 0,
 				lingerDuration: 60 * 30,
 				froDuration: 0,
+				isSmoothed: false,
 				onTraversed: () => {
 					if( this.ChoiceMade == null ) {
 						copyCam.Seek( 1 );
@@ -132,6 +133,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 				toDuration: 0,
 				lingerDuration: 0,
 				froDuration: 60,
+				isSmoothed: false,
 				onStop: () => { }
 			);
 

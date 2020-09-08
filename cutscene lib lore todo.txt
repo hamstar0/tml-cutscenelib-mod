@@ -13,9 +13,9 @@ v1
 	-	@B&D how to make Cutscene non-abstract
 	-	F&T
 		-	Prevent other guides from wandering upon captain's position
+
 -	Create intro cutscene
 	-	Implement camera sine smoothing
-
 	-	Music
 		-	Add music when pirates arrive
 	-	Continue making cannon fire from the pirate ship
