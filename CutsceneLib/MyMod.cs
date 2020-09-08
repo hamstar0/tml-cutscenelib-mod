@@ -33,17 +33,20 @@ namespace CutsceneLib {
 
 		public override void UpdateMusic( ref int music, ref MusicPriority priority ) {
 			var mngr = CutsceneManager.Instance;
+			if( mngr == null ) { return; }
 
-			if( mngr.GetActiveCutscenes_World().Count() > 0 ) {
-				Main.musicFade[Main.curMusic] = 0;
+			Cutscene cutscene = mngr.GetCurrentCutscene_Player( Main.LocalPlayer );
+			if( cutscene == null ) { return; }
 
-				Cutscene cutscene = mngr.GetCurrentCutscene_Player( Main.LocalPlayer );
-				int newMusIdx = cutscene.CurrentScene?.UpdateMusic_Internal() ?? -1;
+			int? newMusIdx = cutscene.CurrentScene?.UpdateMusic_Internal() ?? -1;
+			if( !newMusIdx.HasValue ) { return; }
 
-				if( newMusIdx != -1 ) {
-					Main.curMusic = newMusIdx;
-					Main.musicFade[Main.curMusic] = 1f;
-				}
+			Main.musicFade[Main.curMusic] = 0;
+
+			if( newMusIdx.Value != -1 ) {
+				Main.curMusic = newMusIdx.Value;
+				Main.musicFade[Main.curMusic] = 1f;
+				music = newMusIdx.Value;
 			}
 		}
 	}

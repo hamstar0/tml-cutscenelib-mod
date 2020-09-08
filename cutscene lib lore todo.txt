@@ -15,9 +15,9 @@ v1
 		-	Prevent other guides from wandering upon captain's position
 -	Create intro cutscene
 	-	Implement camera sine smoothing
+
 	-	Music
 		-	Add music when pirates arrive
-
 	-	Continue making cannon fire from the pirate ship
 	-	Enable mouse during cutscene
 	-	Implement interior scene + dialogue

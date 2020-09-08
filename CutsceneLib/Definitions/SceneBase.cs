@@ -6,7 +6,7 @@ using HamstarHelpers.Classes.Errors;
 
 namespace CutsceneLib.Definitions {
 	public abstract partial class SceneBase {
-		public abstract SceneID UniqueId { get; }
+		public SceneID UniqueId { get; }
 
 
 		////
@@ -21,10 +21,19 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 		
-		protected SceneBase( bool primaryViewerDefersToHostForSync, bool isSiezingControls, bool isCutscenePlayerImmune ) {
-			if( !this.ValidateSceneType(this.GetType()) ) {
-				throw new ModHelpersException( "Invalid Scene type "+this.GetType().Name );
+		protected SceneBase(
+					bool primaryViewerDefersToHostForSync,
+					bool isSiezingControls,
+					bool isCutscenePlayerImmune ) {
+			Type mytype = this.GetType();
+			if( !this.ValidateSceneType(mytype) ) {
+				throw new ModHelpersException( "Invalid Scene type "+mytype.Name );
 			}
+
+			this.UniqueId = new SceneID(
+				mytype.Assembly.GetName().Name,
+				mytype.FullName
+			);
 
 			this.PrimaryViewerDefersToHostForSync = primaryViewerDefersToHostForSync;
 			this.IsSiezingControls = isSiezingControls;

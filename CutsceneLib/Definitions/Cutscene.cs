@@ -7,9 +7,9 @@ using CutsceneLib.Net;
 
 namespace CutsceneLib.Definitions {
 	public abstract partial class Cutscene {
-		public abstract CutsceneID UniqueId { get; }
+		public CutsceneID UniqueId { get; }
 
-		public abstract SceneID FirstSceneId { get; }
+		protected abstract SceneID FirstSceneId { get; }
 
 		////
 
@@ -33,6 +33,13 @@ namespace CutsceneLib.Definitions {
 		////////////////
 
 		protected Cutscene( Player playsFor ) {
+			Type mytype = this.GetType();
+
+			this.UniqueId = new CutsceneID(
+				mytype.Assembly.GetName().Name,
+				mytype.FullName
+			);
+
 			this.PlaysForWhom = playsFor?.whoAmI ?? -1;
 		}
 

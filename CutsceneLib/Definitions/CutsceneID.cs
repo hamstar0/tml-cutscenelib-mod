@@ -58,7 +58,7 @@ namespace CutsceneLib.Definitions {
 			var newArgs = new object[args.Length + 1];
 			newArgs[0] = playsFor;
 			args.CopyTo( newArgs, 1 );
-
+			
 			Mod mod = ModLoader.GetMod( this.ModName );
 
 			ObjectHandle objHand = Activator.CreateInstance(

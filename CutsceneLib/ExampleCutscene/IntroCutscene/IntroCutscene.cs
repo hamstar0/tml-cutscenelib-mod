@@ -18,12 +18,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene {
 
 		////////////////
 
-		public override CutsceneID UniqueId { get; } = new CutsceneID(
-			mod: CutsceneLibMod.Instance,
-			cutsceneType: typeof(IntroCutscene)
-		);
-
-		public override SceneID FirstSceneId { get; } = new SceneID(
+		protected override SceneID FirstSceneId { get; } = new SceneID(
 			mod: CutsceneLibMod.Instance,
 			sceneType: typeof(Intro00_SettingScene)
 		);

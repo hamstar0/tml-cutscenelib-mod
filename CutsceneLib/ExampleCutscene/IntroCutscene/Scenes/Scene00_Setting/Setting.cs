@@ -12,15 +12,6 @@ using CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates;
 namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene00_Setting {
 	partial class Intro00_SettingScene
 				: Scene<IntroCutscene, IntroMovieSet, IntroCutsceneStartProtocol, IntroCutsceneUpdateProtocol> {
-		public override SceneID UniqueId { get; } = new SceneID(
-			mod: CutsceneLibMod.Instance,
-			sceneType: typeof(Intro00_SettingScene)
-		);
-
-
-
-		////////////////
-
 		public Intro00_SettingScene( IntroMovieSet set )  : base( false, true, true, set ) { }
 
 

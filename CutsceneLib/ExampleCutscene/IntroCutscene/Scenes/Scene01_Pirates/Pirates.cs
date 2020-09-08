@@ -21,15 +21,6 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		////////////////
 
-		public override SceneID UniqueId { get; } = new SceneID(
-			mod: CutsceneLibMod.Instance,
-			sceneType: typeof(Intro01_PiratesScene)
-		);
-
-
-
-		////////////////
-
 		public Intro01_PiratesScene( IntroMovieSet set )  : base( false, true, true, set ) { }
 
 
@@ -37,6 +28,12 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		public override SceneID GetNextSceneId() {
 			return null;
+		}
+
+
+		////////////////
+		protected override int? UpdateMusicID() {
+			return MusicID.PirateInvasion;
 		}
 
 

@@ -9,6 +9,21 @@ namespace CutsceneLib.Definitions {
 
 
 		////////////////
+		
+		internal int? UpdateMusic_Internal() {
+			return this.UpdateMusicID();
+		}
+
+		////
+
+		/// <summary></summary>
+		/// <returns>Current music type (index in `Main.music`) to play. `-1` is silence. `null` is biome default.</returns>
+		protected virtual int? UpdateMusicID() {
+			return -1;
+		}
+
+
+		////////////////
 
 		internal bool UpdateNPC_Internal( NPC npc ) {
 			return this.UpdateNPC( npc );
