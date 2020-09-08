@@ -41,7 +41,7 @@ namespace CutsceneLib.Definitions {
 		////////////////
 
 		internal void DrawInterface() {
-			this.CurrentScene?.DrawInterface();
+			this.CurrentScene?.DrawInterface_Internal();
 		}
 	}
 }

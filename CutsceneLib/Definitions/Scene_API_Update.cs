@@ -15,7 +15,6 @@ namespace CutsceneLib.Definitions {
 			return this.Update( (T)parent );
 		}
 
-
 		////
 
 		/// <summary></summary>

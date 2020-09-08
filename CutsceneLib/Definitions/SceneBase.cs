@@ -1,7 +1,7 @@
 ﻿using System;
 using Terraria;
-using HamstarHelpers.Classes.Errors;
 using CutsceneLib.Net;
+using HamstarHelpers.Classes.Errors;
 
 
 namespace CutsceneLib.Definitions {
@@ -50,45 +50,18 @@ namespace CutsceneLib.Definitions {
 
 		////////////////
 
-		public abstract SceneID GetNextSceneId();
-
-
-		////////////////
-
 		internal abstract bool AllowNPC_Internal( Cutscene parent, NPC npc );
 
-
-		////////////////
 
 		internal abstract CutsceneStartProtocol CreatePacketPayload_Internal( Cutscene cutscene );
 
 
-		////////////////
-
 		internal abstract void BeginScene_Internal( Cutscene parent );
 
-		////////////////
-
 		internal abstract void EndScene_Internal( Cutscene parent );
-
-
-		////////////////
 
 		/// <summary></summary>
 		/// <returns>`true` signifies scene has ended.</returns>
 		internal abstract bool UpdateScene_Internal( Cutscene parent );
-
-		////
-
-		public virtual bool UpdateNPC( NPC npc ) {
-			return true;
-		}
-
-		public virtual void UpdateNPCFrame( NPC npc, int frameHeight ) { }
-
-
-		////////////////
-
-		public virtual void DrawInterface() { }
 	}
 }

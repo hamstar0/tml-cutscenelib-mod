@@ -3,6 +3,7 @@ using Terraria;
 using Terraria.ModLoader;
 using HamstarHelpers.Helpers.Debug;
 using CutsceneLib.Logic;
+using CutsceneLib.Definitions;
 
 
 namespace CutsceneLib {
@@ -31,8 +32,18 @@ namespace CutsceneLib {
 		////////////////
 
 		public override void UpdateMusic( ref int music, ref MusicPriority priority ) {
-			if( CutsceneManager.Instance.GetActiveCutscenes_World().Count() > 0 ) {
+			var mngr = CutsceneManager.Instance;
+
+			if( mngr.GetActiveCutscenes_World().Count() > 0 ) {
 				Main.musicFade[Main.curMusic] = 0;
+
+				Cutscene cutscene = mngr.GetCurrentCutscene_Player( Main.LocalPlayer );
+				int newMusIdx = cutscene.CurrentScene?.UpdateMusic_Internal() ?? -1;
+
+				if( newMusIdx != -1 ) {
+					Main.curMusic = newMusIdx;
+					Main.musicFade[Main.curMusic] = 1f;
+				}
 			}
 		}
 	}

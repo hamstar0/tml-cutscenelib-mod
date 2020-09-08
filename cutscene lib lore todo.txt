@@ -5,15 +5,19 @@ Future
 
 v1
 -	@MH: Set PingProtocol to be "verbose" (attribute?)
--	F&T
-	-	Prevent other guides from wandering upon captain's position
--	Implement camera sine smoothing
 -	Finish implementing cutscene mechanics
 	-	Restore player position
 	-	Cleanup loaded set after all scenes traversed
 	-	Pause cutscene if tabbed out or literally paused
-
+	-	Set UniqueId to be automatically generated
+	-	@B&D how to make Cutscene non-abstract
+	-	F&T
+		-	Prevent other guides from wandering upon captain's position
 -	Create intro cutscene
+	-	Implement camera sine smoothing
+	-	Music
+		-	Add music when pirates arrive
+
 	-	Continue making cannon fire from the pirate ship
 	-	Enable mouse during cutscene
 	-	Implement interior scene + dialogue

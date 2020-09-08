@@ -106,7 +106,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		////
 
-		public override bool UpdateNPC( NPC npc ) {
+		protected override bool UpdateNPC( NPC npc ) {
 			var cam = CameraMover.Current;
 
 			switch( cam.Name ) {
@@ -125,7 +125,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		////////////////
 
-		public override void UpdateNPCFrame( NPC npc, int frameHeight ) {
+		protected override void UpdateNPCFrame( NPC npc, int frameHeight ) {
 			switch( CameraMover.Current.Name ) {
 			case "CutsceneLib_Intro_Pirates_0":
 				this.UpdateNPCFrame00_ExteriorAttack( npc, frameHeight );
@@ -143,7 +143,7 @@ namespace CutsceneLib.ExampleCutscene.IntroCutscene.Scenes.Scene01_Pirates {
 
 		////////////////
 
-		public override void DrawInterface() {
+		protected override void DrawInterface() {
 			switch( CameraMover.Current.Name ) {
 			case "CutsceneLib_Intro_Pirates_0":
 				break;
